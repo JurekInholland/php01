@@ -9,22 +9,21 @@ class Post {
     protected $image;
     protected $content;
     protected $privacy;
-    protected $comments;
+    protected $author;
 
     public function __construct($properties)
     {
         extract($properties);
-
         $this->id = $post_id;
         $this->title = $post_title;
         $this->content = $post_content;
         $this->date = $post_date;
-        $this->image = new Image(["image_id" => $image_id, "filename" => $filename, "extension" => $extension]);
+        $this->image = new Image($properties);
         $this->content = $post_content;
         $this->privacy = $privacy;
         $this->slug = $slug;
         
-        $this->comments = $comments;
+        // $this->comments = $comments;
         $this->author = new User($properties);
 
     }
@@ -32,6 +31,10 @@ class Post {
 
     public function getTitle() {
         return $this->title;
+    }
+
+    public function getAuthor() {
+        return $this->author;
     }
 
     public function getSlug() {

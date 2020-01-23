@@ -7,8 +7,8 @@
 </figure>
 </a>
 <ul class="post_info">
-    <li>Author</li>
-    <li>Post Title asd fsdfsd</li>
-    <li>post date</li>
+    <li><?=$post->getTitle()?></li>
+    <li><?=$post->getAuthor()->getName()?></li>
+    <li><?=$post->getDate()?></li>
 </ul>
 

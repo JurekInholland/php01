@@ -11,4 +11,5 @@ $router = new Router();
 $router = Router::load("../src/core/router/routes.php");
 
 // determine & require desired controller for route
+
 $router->direct(Request::uri(), Request::method());

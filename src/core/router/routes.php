@@ -14,3 +14,7 @@ $router->get("register", "AuthController@register");
 $router->post("login/submit", "AuthController@submitLogin");
 // $router->post("logout/submit", "AuthController@submitLogout");
 $router->post("register/submit", "AuthController@submitRegister");
+
+
+
+$router->get("create", "PostController@createPost");

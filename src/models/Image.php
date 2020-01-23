@@ -14,5 +14,15 @@ class Image {
         $this->extension = $extension;
     }
 
+    public function getId() {
+        return $this->id;
+    }
 
+    public function getExtension() {
+        return $this->extension;
+    }
+
+    public function getLink() {
+        return "/uploads/{$this->getId()}{$this->getExtension()}";
+    }
 }

@@ -13,14 +13,17 @@ class User {
     public function __construct($properties)
     {
         extract($properties);
-        
+
+
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
         $this->role = $role;
         $this->registrationDate = $registration_date;
-        $this->profileImage = $profile_image;
+        if (isset($profile_image)) {
+            $this->profileImage = new Image($properties);
+        }
     }
 
     public function getId() {

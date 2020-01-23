@@ -37,7 +37,6 @@ class Router {
 
     // If a route matches a given uri, load the respective controller
     public function direct(string $uri, string $requestType) {
-
         // Check if the given uri is a key in the requestType (GET or POST) array of routes
         if (array_key_exists($uri, $this->routes[$requestType])) {
 
