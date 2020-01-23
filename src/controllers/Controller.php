@@ -14,7 +14,7 @@ class Controller {
 
         // Require general view partials required on every page
         require "../src/views/partials/head.php";
-        // ...
+        require "../src/views/partials/navigation.php";
 
         // Require the requested view
         require "../src/views/{$viewName}.php";

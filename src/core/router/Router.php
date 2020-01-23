@@ -48,7 +48,7 @@ class Router {
                 ...explode("@", $this->routes[$requestType][$uri])
             );
         }
-        throw new Exception("No route defined for this uri");
+        throw new Exception("No route defined for this uri: {$uri}");
     }
 
     // Call given method of given controller

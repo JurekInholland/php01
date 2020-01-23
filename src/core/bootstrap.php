@@ -31,7 +31,7 @@ spl_autoload_register(function ($class) {
 });
 
 // include_once '../src/core/router/routes.php';
-// include_once '../src/core/helpers.php';
+include_once '../src/core/helpers.php';
 
 // Set correct time zone
 date_default_timezone_set('Europe/Amsterdam');
