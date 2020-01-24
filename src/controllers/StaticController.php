@@ -10,4 +10,9 @@ class StaticController extends Controller {
         // die(var_dump($posts));
         return self::view("posts/overview", ["posts" => $posts]);
     }
+
+
+    public function notFound() {
+        return self::view("partials/not_found");
+    }
 }

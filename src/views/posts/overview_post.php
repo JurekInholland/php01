@@ -1,14 +1,28 @@
+<style>
+.post_title {
+    color: rgba(255, 255, 255, .85);
+    font-weight: bold;
+}
+.overview_post {
+    border: 1px solid transparent;
+    border-radius: 8px;
+}
+
+</style>
 
 
-<a href="" class="post_link">
+<article class="overview_post">
 
-<figure class="image_container">
-    <img src="/uploads/2018.png" alt="">
-</figure>
-</a>
-<ul class="post_info">
-    <li><?=$post->getTitle()?></li>
-    <li><?=$post->getAuthor()->getName()?></li>
-    <li><?=$post->getDate()?></li>
-</ul>
+    <a  href="/edit?post=<?=$post->getSlug()?>" class="post_link">
 
+        <figure class="image_container">
+            <img src="/uploads/2018.png" alt="">
+        </figure>
+    </a>
+    <ul class="post_info">
+        <li class="post_title" ><a href="/edit?post=<?=$post->getSlug()?>"><?=$post->getTitle()?></a></li>
+        <li><a href="/user?name=<?=$post->getAuthor()->getName()?>"><?=$post->getAuthor()->getName()?></a> </li>
+        <li><?=$post->getDate()?></li>
+    </ul>
+
+</article>

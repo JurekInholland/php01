@@ -14,20 +14,32 @@ class Post {
     public function __construct($properties)
     {
         extract($properties);
-        $this->id = $post_id;
-        $this->title = $post_title;
-        $this->content = $post_content;
-        $this->date = $post_date;
-        $this->image = new Image($properties);
-        $this->content = $post_content;
-        $this->privacy = $privacy;
-        $this->slug = $slug;
+        $this->id = $post_id ?? "";
+        $this->title = $post_title ?? "";
+        $this->content = $post_content ?? "";
+        $this->content = $post_content ?? "";
+        $this->privacy = $privacy ?? "";
+        $this->slug = $slug ?? "";
+
+        if (!empty($post_date)) {
+            $this->date = new  DateTime($post_date);
+        }
+
+        if (!empty($image_id)) {
+            $this->image = new Image($properties);
+        }
+
+        
+
         
         // $this->comments = $comments;
         $this->author = new User($properties);
 
     }
 
+    public function getId() {
+        return $this->id;
+    }
 
     public function getTitle() {
         return $this->title;
@@ -42,7 +54,7 @@ class Post {
     }
 
     public function getDate() {
-        return $this->date;
+        return $this->date->format("d.m.Y");
     }
 
     public function getImage() {

@@ -9,9 +9,9 @@ class Image {
     {
         extract($properties);
 
-        $this->id = $image_id;
-        $this->filename = $filename;
-        $this->extension = $extension;
+        $this->id = $image_id ?? "";
+        $this->filename = $filename ?? "";
+        $this->extension = $extension ?? "";
     }
 
     public function getId() {

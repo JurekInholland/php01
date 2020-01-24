@@ -9,7 +9,7 @@
     align-items: stretch;
     align-content: stretch;
     /* height: 800px; */
-    height: calc(100vh - 56px);
+    min-height: calc(100vh - 56px);
 }
 .form {
     background-color: rgba(0, 0, 0, .25);
@@ -47,20 +47,17 @@
     background-color: rgba(0, 0, 0, .5);
     flex: 1 1 auto;
     min-width: 200px;
+    min-height: 300px;
 
 }
 .form img {
-    border: none;
-    /* height: 500px; */
-    object-fit: contain;
-    max-width: 100%;
-    overflow: hidden;
-    max-height: 600px;
+/* object-fit: scale-down; */
+max-width: 100%;
 }
 #post_title {
     font-size: 2rem;
     font-weight: bold;
-    color:rgba(255, 255, 255, .85);
+    color:rgba(255, 255, 255, .95);
     margin-bottom: .75rem;
 }
 
@@ -72,40 +69,86 @@
 }
 
 #droparea {
-    background-color: rgba(0, 0, 0, .4);
+    /* background-color: rgba(0, 0, 0, .4); */
     display: flex;
     flex: 1 1 auto;
     justify-content: center;
+    box-sizing: border-box;
 }
+
+
+
 .default {
-    height: 500px;
+    height: 350px;
     background-color: transparent;
-    /* max-width: 350px;
-    max-height: 350px; */
-    /* border: 2px dashed red; */
+    object-fit: cover;
+
+}
+.default_drop {
+    border: 3px solid transparent;
 
 }
 
 .drop {
+    /* background-color: rgba(0, 0, 0, .4); */
     border-spacing: -12px;
-    border: 3px dashed red;
+    border: 3px dashed #1BB76E;
+}
+
+.has_img {
+    background-color: rgba(0, 0, 0, .4);
+
+}
+
+.active {
+    object-fit: scale-down;
+    height: auto;
+    max-height: 500px;
+
+
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0.33; }
+  50% { opacity: 0.75;}
+  100% {opacity: 0.33;}
+
+}
+
+#image.default {
+    animation-name: fadeIn;
+    animation-duration: 2.5s;
+    animation-iteration-count:infinite;
+    animation-timing-function: ease-in;
+
 }
 </style>
 
+<?php
 
+if (!empty($post)) {
+
+}
+
+
+
+?>
 
 <section class="create_container">
-    <form action="" class="form">
+    <form action="/post/submit" method="POST" class="form">
+        <input type="hidden" name="post_id" value="<?=$post->getId()?>">
         <section class="img_container">
-        <input id="post_title" type="text" name="title" placeholder="Enter a post title...">
-            <figure id="droparea">
-                <img src="/img/uploadtext.svg" id="image"  class="default"/>
+        <input required id="post_title" type="text" name="title" placeholder="Enter a post title..." <?=$readonly?> value="<?=$post->getTitle()?>">
+            <figure id="droparea" class="default_drop">
+                <img src="/img/uploadtext2.svg" id="image"  class="default"/>
 
             </figure>
-            <input id="files" type="file" name="image">
-        <textarea id="description" name="content" placeholder="Add a description..."></textarea>
+            <input required id="files" type="file" name="image">
+        <textarea required id="description" name="content" placeholder="Add a description..." <?=$readonly?>><?=$post->getContent()?></textarea>
+        <input type="submit" name="" class="button is-primary">
 
         </section>
+
     </form>
 
     <section class="post_settings">
@@ -123,19 +166,37 @@ document.getElementById("files").onchange = function () {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-        console.log(e);
 
         displayImage(e);
     };
 
+    // reader.readAsDataURL(this.files[0]);
+
     // read the image file as a data URL.
-    reader.readAsDataURL(this.files[0]);
+    try {
+        reader.readAsDataURL(this.files[0]);
+
+    // If open file dialog was canceled
+    } catch(TypeError) {
+        if (files.files.length == 0) {
+            image.src = "/img/uploadtext2.svg";
+            droparea.classList.remove("has_img");
+            image.classList.remove("active");
+            image.classList.add("default");
+
+        }
+
+    }
 
 };
 
 function displayImage(e) {
     image.src = e.target.result;
     image.classList.remove("default");
+    image.classList.add("active");
+    
+    // image.classList.remove("default");
+    droparea.classList.add("has_img");
 }
 
 image.ondragover = image.ondragenter = function(evt) {

@@ -11,9 +11,16 @@ $router->get("login", "AuthController@login");
 $router->get("logout", "AuthController@logout");
 $router->get("register", "AuthController@register");
 
+$router->get("edit", "PostController@editPost");
+
+
+
 $router->post("login/submit", "AuthController@submitLogin");
 // $router->post("logout/submit", "AuthController@submitLogout");
 $router->post("register/submit", "AuthController@submitRegister");
+
+
+$router->post("post/submit", "PostController@submitPost");
 
 
 

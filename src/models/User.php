@@ -15,12 +15,13 @@ class User {
         extract($properties);
 
 
-        $this->id = $id;
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
-        $this->role = $role;
-        $this->registrationDate = $registration_date;
+        $this->id = $id ?? "";
+        $this->name = $name ?? "";
+        $this->email = $email ?? "";
+        $this->password = $password ?? "";
+        $this->role = $role ?? "";
+        $this->roleName = $role_name ?? "";
+        $this->registrationDate = $registration_date ?? "";
         if (isset($profile_image)) {
             $this->profileImage = new Image($properties);
         }
@@ -33,6 +34,20 @@ class User {
     public function getName() {
         return $this->name;
     }
+    public function getEmail() {
+        return $this->email;
+    }
 
+    public function getRole() {
+        return $this->role;
+    }
+
+    public function getRoleName() {
+        return $this->roleName;
+    }
     
+    public function getRegistrationDate() {
+        return $this->registrationDate;
+    }
+
 }

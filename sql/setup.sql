@@ -1,15 +1,5 @@
 DROP TABLE IF EXISTS cms_users;
 
-CREATE TABLE cms_users (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(100) NOT NULL,
-    `email` VARCHAR(100) NOT NULL,
-    `password` VARCHAR(100) NOT NULL,
-    `role` INT(11) NOT NULL,
-	`registration_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`profile_image` CHAR(16) NULL DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
 
 CREATE TABLE `cms_comments` (
 	`comment_id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -53,6 +43,19 @@ CREATE TABLE `cms_users` (
 )
 )ENGINE=InnoDB;
 
+CREATE TABLE `cms_login_tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` char(64) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `cms_role_names` (
+	`role_id` INT(11) NULL DEFAULT NULL,
+	`role_name` VARCHAR(50) NULL DEFAULT NULL
+)ENGINE=InnoDB;
+
+
 -- INSERT INTO cms_users (id, name, email, password, role) VALUES
 -- (1, 'admin', 'admin@mail.com', 'asd', 1),
 -- (2, 'user', 'user@mail.com', 'password', 0);
@@ -60,11 +63,20 @@ CREATE TABLE `cms_users` (
 INSERT INTO `cms_users` (`id`, `name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES (1, 'admin', 'admin@mail.com', 'asd', 1, '2020-01-22 20:48:03', NULL);
 INSERT INTO `cms_users` (`id`, `name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES (2, 'user', 'user@mail.com', 'password', 0, '2020-01-22 20:48:03', '111111111111111');
 
-INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (1, 'title #1', 'ksdfsdhflsfh', 'title', 0, '2020-01-23 04:08:33', '1234567890qwertz', 1);
-INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (2, 'titl2', '2222', 'titl2', 1, '2020-01-23 03:24:52', '1111111111111111', 2);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (1, 'Post #1', 'Helvetica direct trade vexillologist slow-carb, asymmetrical etsy 90s mustache williamsburg. Gastropub single-origin coffee deep v tilde kombucha activated charcoal meggings kale chips flannel cardigan hot chicken.', 'title', 0, '2020-01-23 04:08:33', '1234567890qwertz', 1);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (2, 'Posttitle 2', 'Pickled cold-pressed flexitarian chillwave beard celiac. Glossier chicharrones yuccie snackwave.', 'titl2', 1, '2020-01-23 03:24:52', '1111111111111111', 2);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (3, 'Another title', 'Sartorial edison bulb pickled fashion axe biodiesel butcher semiotics.', 'titl3', 1, '2020-01-23 21:49:48', NULL, 1);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (4, 'Post 4', 'Tumblr asymmetrical brooklyn gentrify actually, neutra readymade trust fund poutine man braid artisan lyft twee.', 'p4', 1, '2020-01-24 12:58:17', NULL, 1);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (5, 'That would be post 5', 'Meditation vape food truck post-ironic shabby chic. XOXO listicle deep v slow-carb taiyaki, banh mi chillwave beard chartreuse gentrify chambray. ', 'p5', 1, '2020-01-24 13:36:11', NULL, 1);
+
 
 INSERT INTO `cms_images` (`image_id`, `filename`, `extension`) VALUES ('1234567890qwertz', 'image01.jpg', 'jpg');
 INSERT INTO `cms_images` (`image_id`, `filename`, `extension`) VALUES ('111111111111111', 'profilepic.jpg', 'jpg');
 
 INSERT INTO `cms_comments` (`comment_id`, `comment_title`, `comment_text`, `comment_date`, `user_id`, `post`) VALUES (1, 'comment #1', 'lol a comment', '2020-01-23 03:57:10', 1, 1);
 INSERT INTO `cms_comments` (`comment_id`, `comment_title`, `comment_text`, `comment_date`, `user_id`, `post`) VALUES (2, 'comment #2', '2nd comment', '2020-01-23 04:09:22', 2, 1);
+
+INSERT INTO `cms_role_names` (`role_id`, `role_name`) VALUES (0, 'Guest');
+INSERT INTO `cms_role_names` (`role_id`, `role_name`) VALUES (1, 'User');
+INSERT INTO `cms_role_names` (`role_id`, `role_name`) VALUES (2, 'Administrator');
+INSERT INTO `cms_role_names` (`role_id`, `role_name`) VALUES (3, 'Superadministrator');

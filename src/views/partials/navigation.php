@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-      <img src="/img/logo.png">
+    <a class="logo" href="/">
+      <img src="/img/logo.svg" height="auto" width="100px">
     </a>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMain">
@@ -13,14 +13,37 @@
 
   <div id="navbarMain" class="navbar-menu">
     <div class="navbar-start">
+
+    
+
+      <section class="control has-icons-left">
+      <a href="/create" class="button is-primary" id="new_post">
+        <strong> New Post</strong>
+      </a>
+          <span class="icon is-small is-left">
+            <i class="fas fa-plus-square"></i>
+          </span>
+      </section>
+
+
       <a href="/" class="navbar-item">
         Home
       </a>
 
-      <a class="navbar-item">
-        Documentation
+     
+
+      <a href="/users" class="navbar-item">
+        Users
       </a>
 
+      <a href="/users" class="navbar-item">
+        API
+      </a>
+
+      <a href="/users" class="navbar-item">
+        About
+      </a>
+<!-- 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
           More
@@ -40,23 +63,30 @@
           <a class="navbar-item">
             Report an issue
           </a>
+
         </div>
-      </div>
+
+      </div> -->
     </div>
 
     <div class="navbar-end">
+
       <div class="navbar-item">
         <div class="buttons">
+        <a href="/login" class="button empty">
+            <strong>Sign in</strong>
+          </a>
           <a href="/register" class="button is-primary">
             <strong>Sign up</strong>
           </a>
-          <a href="/login" class="button is-light">
-            Log in
-          </a>
+         
         </div>
       </div>
+
     </div>
+
   </div>
+
 </nav>
 <script>
 document.addEventListener('DOMContentLoaded', () => {

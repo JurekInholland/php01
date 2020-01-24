@@ -6,6 +6,10 @@ class AuthController extends Controller {
         self::view("auth/login");
     }
 
+    public function submitLogin() {
+        die(var_dump($_POST));
+    }
+
     public function logout() {
 
     }

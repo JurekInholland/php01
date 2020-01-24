@@ -1,19 +1,84 @@
+<style>
+    .table {
+        width: 100%;
+        /* display: flex;
+        flex-direction: row;
+        flex-wrap: wrap; */
+        /* background-color: rgba(255, 255, 255, .25);
+        border-color: red; */
+        /* align-items: stretch;
+    align-content: stretch; */
+    }
+
+    .table tr td {
+        flex-grow: 1;
+        flex-basis: 100%;
+        border: 1px solid rgba(255, 255, 255, .25);
+    }
+
+    h1 {
+        font-size: 3rem;
+        color: rgba(255, 255, 255, .85);
+    }
+
+    .headrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        /* line-height: 10rem; */
+        /* justify-content: center; */
+    }
+
+    .searchform {
+        margin: 0;
+    }
+</style>
+
+
+<section class="container">
+
+<section class="headrow">
 <h1>All Users:</h1>
-<ul>
-<table>
-<thead>
+<form action="/users" class="searchform" method="GET">
+<section class="control has-icons-left">
+    <input class="input" placeholder="Search Users" type="text" name="q" value="<?=$_GET["q"] ?? ""?>">
+    <span class="icon is-small is-left">
+        <i class="fas fa-search"></i>
+    </span>
+</section>
 
-    <tr>
-        <th>User Id</th>
-        <th>Username</th>
-        <th>Role</th>
-    </tr>
+</form>
+</section>
 
-</thead>
+    <table class="table">
+    <thead>
 
-</table>
+        <tr>
+            <th>User Id</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Registration Date</th>
+        </tr>
 
-<?php foreach ($users as $key => $user) : ?>
-    <a href="/user?id=<?=$user->getId()?>"><?=$user->getName()?></a>
-<?php endforeach; ?>
-</ul>
+    </thead>
+
+    <?php foreach ($users as $key => $user) : ?>
+        <tr>
+            <td><?=$user->getId()?></td>
+            <td><a href="/user?id=<?=$user->getId()?>"><?=$user->getName()?></a></td>
+            <td><?=$user->getEmail()?></td>
+            <td><?=$user->getRoleName()?></td>
+            <td><?=$user->getRegistrationDate()?></td>
+        </tr>
+        
+        
+    <?php endforeach; ?>
+
+    </table>
+
+    <form action="/create" class="form" method="POST">
+        <input type="submit" name="createUser" class="button is-primary" value="Create User">
+    </form>
+
+</section>
