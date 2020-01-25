@@ -1,20 +1,5 @@
 <style>
-    .table {
-        width: 100%;
-        /* display: flex;
-        flex-direction: row;
-        flex-wrap: wrap; */
-        /* background-color: rgba(255, 255, 255, .25);
-        border-color: red; */
-        /* align-items: stretch;
-    align-content: stretch; */
-    }
 
-    .table tr td {
-        flex-grow: 1;
-        flex-basis: 100%;
-        border: 1px solid rgba(255, 255, 255, .25);
-    }
 
     h1 {
         font-size: 3rem;

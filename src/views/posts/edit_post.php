@@ -135,7 +135,7 @@ if (!empty($post)) {
 ?>
 
 <section class="create_container">
-    <form action="/post/submit" method="POST" class="form">
+    <form action="/post/submit" method="POST" class="form" enctype="multipart/form-data">
         <input type="hidden" name="post_id" value="<?=$post->getId()?>">
         <section class="img_container">
         <input required id="post_title" type="text" name="title" placeholder="Enter a post title..." <?=$readonly?> value="<?=$post->getTitle()?>">

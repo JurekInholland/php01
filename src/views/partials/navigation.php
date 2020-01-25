@@ -36,11 +36,11 @@
         Users
       </a>
 
-      <a href="/users" class="navbar-item">
+      <a href="/api" class="navbar-item">
         API
       </a>
 
-      <a href="/users" class="navbar-item">
+      <a href="/about" class="navbar-item">
         About
       </a>
 <!-- 

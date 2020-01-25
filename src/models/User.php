@@ -34,6 +34,11 @@ class User {
     public function getName() {
         return $this->name;
     }
+
+    public function getNameCapitalized() {
+        return ucfirst($this->name);
+    }
+
     public function getEmail() {
         return $this->email;
     }
@@ -50,4 +55,13 @@ class User {
         return $this->registrationDate;
     }
 
+    public function getData() {
+        return [
+            "id" => $this->getId(),
+            "name" => $this->getName(),
+            "email" => $this->getEmail(),
+            "role" => $this->getRole(),
+            "registration_date" => $this->getRegistrationDate(),
+        ];
+    }
 }

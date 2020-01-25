@@ -90,6 +90,10 @@ class PostService {
 
     }
 
+    private function validateImage() {
+        // https://stackoverflow.com/a/52663580
+    }
+
     public function uploadImages(array $images) {
         $sql = "INSERT INTO cms_images (image_id, filename, extension) VALUES
                 ()";

@@ -25,3 +25,11 @@ $router->post("post/submit", "PostController@submitPost");
 
 
 $router->get("create", "PostController@createPost");
+
+$router->get("api", "ApiController@index");
+
+$router->get("api/posts", "ApiController@posts");
+$router->get("api/users", "ApiController@users");
+
+$router->get("about", "StaticController@about");
+

@@ -18,9 +18,10 @@ class PostController extends Controller {
 
     public function submitPost() {
         if (!empty($_POST)) {
-            die(var_dump($_POST));
+            // die(var_dump($_POST));
+            die(var_dump($_FILES));
             if ($_POST["post_id"] == "") {
-                PostService::createPost()
+                // PostService::createPost();
             }
         }
     }

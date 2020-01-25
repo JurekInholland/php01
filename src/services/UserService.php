@@ -40,7 +40,9 @@ class UserService {
         $params = [":id" => $userId];
 
         $user = App::get("db")->query($sql, $params);
-        return new User($user[0]); 
+        if (!empty($user[0])) {
+            return new User($user[0]); 
+        }
     }
 
     public static function getUserByName($userName) {
@@ -49,9 +51,8 @@ class UserService {
         $params = [":name" => $userName];
 
         $user = App::get("db")->query($sql, $params);
-        if (isset($user[0])) {
+        if (!empty($user[0])) {
             return new User($user[0]); 
         }
-        return new User([]);
     }
 }

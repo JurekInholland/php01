@@ -34,24 +34,47 @@ h1 {
   width: 100%;
 }
 
-.containers {
+.container {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   margin: 0 1rem;
 }
 
-.containers img {
+.container img {
   margin-top: 1rem;
   width: 75%;
   min-width: 200px;
   max-width: 500px;
 }
 
+#forgot {
+  text-align: end;
+  /* margin-top: .25rem; */
+  margin-top: .25rem;
+  margin-bottom: 1rem;
+  border: 0;
+  color: #1BB76E;
+  background-color: transparent;
+  align-items: flex-end;
+  /* justify-content: flex-end; */
+  width: 100%;
+  cursor: pointer;
+  /* margin-bottom: 1rem; */
+}
+
+#forgot:hover {
+  color: #0fce7e;
+  cursor: 
+}
+
+#password {
+  margin-bottom: 0;
+}
 </style>
 
-<div class="containers">
+<div class="container">
   <img src="/img/logo.svg" alt="">
   <form action="/login/submit" class="form" method="POST">
   <!-- <label for="">Username</label> -->
@@ -64,12 +87,15 @@ h1 {
       </section>
 
       <!-- <label for="">Password</label> -->
-      <section class="control has-icons-left">
+      <section class="control has-icons-left" id="password" >
           <input class="input" type="text" placeholder="Password" name="password" value="">
           <span class="icon is-small is-left">
             <i class="fas fa-key"></i>
           </span>
       </section>
+
+      <input type="button" onclick="this.form.submit();" name="forgot" value="Forgot password?" id="forgot">
+
 
       <section class="control">
       <input type="submit" name="submitBtn" id="" class="button is-primary">

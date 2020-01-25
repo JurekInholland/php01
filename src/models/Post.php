@@ -22,11 +22,13 @@ class Post {
         $this->slug = $slug ?? "";
 
         if (!empty($post_date)) {
-            $this->date = new  DateTime($post_date);
+            $this->date = new DateTime($post_date);
         }
 
         if (!empty($image_id)) {
             $this->image = new Image($properties);
+        } else {
+            $this->image = new Image([]);
         }
 
         
@@ -67,5 +69,21 @@ class Post {
 
     public function getPrivacy() {
         return $this->privacy;
+    }
+
+    public function getLink() {
+        $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/edit?post={$this->getSlug()}";
+        return stripslashes($url);
+    }
+
+    public function getData() {
+        return [
+            "id" => $this->getId(),
+            "title" => $this->getTitle(),
+            "content" => $this->getContent(),
+            "image_id" => $this->getImage()->getId() ?? "",
+            "author" => $this->getAuthor()->getName(),
+            "link" => $this->getLink()
+        ];
     }
 }

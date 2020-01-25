@@ -20,11 +20,16 @@ class UserController extends Controller {
         } elseif (isset($_GET["name"])) {
             $user = UserService::getUserByName($_GET["name"]);
 
+        } else {
+            return self::view("partials/message", ["message" => "No username specified."]);
         }
 
         if (!empty($user)) {
             $posts = PostService::getPostsByUserId($user->getId());
             // die(var_dump($posts));
+        } else {
+            return self::view("partials/message", ["message" => "No user found."]);
+
         }
         // die(var_dump($posts));
         self::view("users/user_profile", ["user" => $user, "posts" => $posts]);

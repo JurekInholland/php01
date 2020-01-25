@@ -18,6 +18,7 @@ class Controller {
 
         // Require the requested view
         require "../src/views/{$viewName}.php";
+        require "../src/views/partials/footer.php";
 
         session_unset();
     }

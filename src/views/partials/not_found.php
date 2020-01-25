@@ -4,11 +4,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     height: 200px;
     /* width: 50%; */
     margin: 0 auto;
+    margin-top: 1rem;
     max-width: 700px;
+    height: calc(100vh - 56px);
 }
 
 .error404 h1 {

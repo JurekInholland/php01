@@ -15,4 +15,8 @@ class StaticController extends Controller {
     public function notFound() {
         return self::view("partials/not_found");
     }
+
+    public function about() {
+        return self::view("about");
+    }
 }
