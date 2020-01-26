@@ -30,6 +30,9 @@ $router->get("api", "ApiController@index");
 
 $router->get("api/posts", "ApiController@posts");
 $router->get("api/users", "ApiController@users");
+$router->get("api/cronjob", "ApiController@cronjob");
+
+
 
 $router->get("about", "StaticController@about");
 

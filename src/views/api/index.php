@@ -35,20 +35,27 @@
         <tbody>
             <tr>
                 <td><a href="/api/posts">/api/posts</a></td>
-                <td>Get json object of all site posts.</td>
+                <td>Get json object of all public site posts.</td>
                 <td>No</td>
             </tr>
 
             <tr>
                 <td><a href="/api/users">/api/users</a></td>
                 <td>Get json object of all users.</td>
-                <td>Yes</td>
+                <td>Yes (api key)</td>
             </tr>
 
             <tr>
                 <td><a href="/api/images">/api/images</a></td>
                 <td>Get json object of all images.</td>
-                <td>Yes</td>
+                <td>Yes (api key)</td>
+            </tr>
+
+            <tr>
+                <td><a href="/api/cronjob">/api/cronjob</a></td>
+                <td>This endpoint is accessed by a cronjob vial <a href="https://curl.haxx.se/">curl</a>.
+                A special cronjob key is necessary for access. This is not meant to be accessed by users.</td>
+                <td>Yes (cronjob key)</td>
             </tr>
 
         </tbody>

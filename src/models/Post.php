@@ -17,7 +17,6 @@ class Post {
         $this->id = $post_id ?? "";
         $this->title = $post_title ?? "";
         $this->content = $post_content ?? "";
-        $this->content = $post_content ?? "";
         $this->privacy = $privacy ?? "";
         $this->slug = $slug ?? "";
 
@@ -61,6 +60,10 @@ class Post {
 
     public function getImage() {
         return $this->image;
+    }
+
+    public function getImageId() {
+        return $this->image->getId();
     }
 
     public function getContent() {

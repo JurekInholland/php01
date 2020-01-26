@@ -8,7 +8,7 @@ class User {
     protected $role;
     protected $registrationDate;
     protected $profileImage;
-
+    protected $postCount;
 
     public function __construct($properties)
     {
@@ -19,11 +19,17 @@ class User {
         $this->name = $name ?? "";
         $this->email = $email ?? "";
         $this->password = $password ?? "";
-        $this->role = $role ?? "";
+        $this->role = $role ?? "0";
         $this->roleName = $role_name ?? "";
         $this->registrationDate = $registration_date ?? "";
+
+        $this->postCount = $post_count ?? "0";
+
         if (isset($profile_image)) {
             $this->profileImage = new Image($properties);
+        } else {
+            $this->profileImage = new Image([]);
+
         }
     }
 
@@ -53,6 +59,21 @@ class User {
     
     public function getRegistrationDate() {
         return $this->registrationDate;
+    }
+
+    public function getProfilePicture() {
+        // die(var_dump($this->profileImage));
+
+        if (!empty($this->profileImage->getLink())) {
+            return $this->profileImage->getLink();
+        }
+
+        // Return default profile picture of none was set
+        return "/img/default.svg";
+    }
+
+    public function getPostCount() {
+        return $this->postCount;
     }
 
     public function getData() {

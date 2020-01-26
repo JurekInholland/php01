@@ -3,8 +3,12 @@
 class UserService {
     
     public static function getAll() {
-        $sql = "SELECT * FROM cms_users
+        $sql = "SELECT *,
+        (SELECT COUNT(*) FROM cms_posts
+        WHERE cms_users.id = user_id) AS post_count
+        FROM cms_users
         LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
+        LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
         ORDER BY name";
 
         $data = App::get("db")->query($sql);
@@ -17,8 +21,13 @@ class UserService {
 
 
     public static function queryUsers($query) {
-        $sql = "SELECT * FROM cms_users
+        $sql = "SELECT *,
+        (SELECT COUNT(*) FROM cms_posts
+        WHERE cms_users.id = user_id) AS post_count
+        FROM cms_users
         LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
+        LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
+
         WHERE name LIKE :query OR email LIKE :query OR registration_date LIKE :query
         ORDER BY name";
         $params = [":query" => "%{$query}%"];
@@ -33,8 +42,13 @@ class UserService {
     }
 
     public static function getUserById($userId) {
-        $sql = "SELECT * FROM cms_users
+        $sql = "SELECT *,
+        (SELECT COUNT(*) FROM cms_posts
+        WHERE cms_users.id = user_id) AS post_count
+        FROM cms_users
         LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
+        LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
+
         WHERE id=:id";
 
         $params = [":id" => $userId];
@@ -45,8 +59,20 @@ class UserService {
         }
     }
 
+    // SELECT *,
+    // (SELECT COUNT(*) FROM cms_posts
+    //         WHERE cms_users.id = user_id) AS post_count
+    
+    // from cms_users, cms_posts
+
     public static function getUserByName($userName) {
-        $sql = "SELECT * FROM cms_users WHERE name=:name";
+        $sql = "SELECT *,
+                (SELECT COUNT(*) FROM cms_posts
+                WHERE cms_users.id = user_id) AS post_count
+                FROM cms_users
+                LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
+                LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
+                WHERE name=:name";
 
         $params = [":name" => $userName];
 

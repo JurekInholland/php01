@@ -47,18 +47,20 @@
         </tr>
 
     </thead>
+    <tbody>
 
-    <?php foreach ($users as $key => $user) : ?>
-        <tr>
-            <td><?=$user->getId()?></td>
-            <td><a href="/user?id=<?=$user->getId()?>"><?=$user->getName()?></a></td>
-            <td><?=$user->getEmail()?></td>
-            <td><?=$user->getRoleName()?></td>
-            <td><?=$user->getRegistrationDate()?></td>
-        </tr>
-        
-        
-    <?php endforeach; ?>
+        <?php foreach ($users as $key => $user) : ?>
+            <tr>
+                <td><?=$user->getId()?></td>
+                <td><a href="/user?id=<?=$user->getId()?>"><?=$user->getName()?></a></td>
+                <td><?=$user->getEmail()?></td>
+                <td><?=$user->getRoleName()?></td>
+                <td><?=$user->getRegistrationDate()?></td>
+            </tr>
+            
+            
+        <?php endforeach; ?>
+    </tbody>
 
     </table>
 

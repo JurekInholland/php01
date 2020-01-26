@@ -36,15 +36,26 @@ class ApiController extends Controller {
 
     }
 
+
+    public function cronjob() {
+        if (empty($_GET["cronjobkey"])) {
+            return self::returnResponse([], 401);
+        }
+
+        
+
+    }
+
+    private static function returnResponse(array $data, int $statusCode=200) {
+        $response = ["status" => $statusCode, "data" => $data];
+
+        self::serveJson($response);
+    }
+
     private static function serveJson(array $jsonData) {
         header('Content-type: application/json');
 
-        if (!empty($jsonData)) {
-            $json = ["status" => 200, "data" => $jsonData];
-        } else {
-            $json = ["status" => 404, "data" => []];
-        }
-        
-        echo json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        // JSON_UNESCAPED_SLASHES = valid links with unescaped slashes
+        echo json_encode($jsonData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 }

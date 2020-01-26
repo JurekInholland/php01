@@ -22,18 +22,22 @@ CREATE TABLE `cms_images` (
 )ENGINE=InnoDB;
 
 CREATE TABLE `cms_posts` (
-    `post_id` INT(11) NOT NULL AUTO_INCREMENT,
-    `post_title` VARCHAR(50) NULL DEFAULT NULL,
-    `post_content` TEXT NULL,
-    `slug` VARCHAR(50) NULL DEFAULT NULL,
-    `privacy` TINYINT(4) NULL DEFAULT NULL,
-    `post_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    `post_image` CHAR(16) NULL DEFAULT NULL,
-    `user_id` INT(11) NULL DEFAULT NULL,
-    PRIMARY KEY (`post_id`),
-    CONSTRAINT `cms_posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+	`post_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`post_title` VARCHAR(50) NULL DEFAULT NULL,
+	`post_content` TEXT NULL,
+	`slug` VARCHAR(50) NULL DEFAULT NULL,
+	`privacy` TINYINT(4) NULL DEFAULT NULL,
+	`post_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`post_image` CHAR(16) NULL DEFAULT NULL,
+	`user_id` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`post_id`),
+	INDEX `cms_posts_ibfk_1` (`user_id`),
+	INDEX `FK_cms_posts_cms_images` (`post_image`),
+	CONSTRAINT `FK_cms_posts_cms_images` FOREIGN KEY (`post_image`) REFERENCES `cms_images` (`image_id`) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT `cms_posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+)
+ENGINE=InnoDB;
 
-)ENGINE=InnoDB;
 
 CREATE TABLE `cms_comments` (
     `comment_id` INT(11) NOT NULL AUTO_INCREMENT,

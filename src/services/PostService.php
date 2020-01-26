@@ -70,7 +70,10 @@ class PostService {
             $posts[] = new Post($postinfo);
         }
 
-        return $posts;
+        if (!empty($posts)) {
+            return $posts;
+
+        }
     }
 
 
@@ -78,7 +81,15 @@ class PostService {
         $sql = "INSERT INTO cms_posts (post_title, post_content, slug, privacy, post_image, user_id)
                 VALUES (:post_title, :post_content, :slug, :privacy, :post_image, :user_id)";
 
-        $params = [":post_title" => ""];
+        $params = [":post_title" => $post->getTitle(),
+                   ":post_content" => $post->getContent(),
+                   ":slug" => $post->getSlug(),
+                   ":privacy" => $post->getPrivacy(),
+                   ":post_image" => $post->getImageId(),
+                   ":user_id" => 3
+        ];
+        App::get("db")->query($sql, $params);
+        
     }
 
     public function editPost() {

@@ -16,7 +16,7 @@
     <a  href="/edit?post=<?=$post->getSlug()?>" class="post_link">
 
         <figure class="image_container">
-            <img src="/uploads/2018.png" alt="">
+            <img src="<?=$post->getImage()->getLink()?>" alt="">
         </figure>
     </a>
     <ul class="post_info">

@@ -41,6 +41,9 @@
     color:rgba(255, 255, 255, .85);
     resize: none;
     min-height: 90px;
+    background-color: rgba(0, 0, 0, .25);
+    border-radius: 5px;
+    padding: .5rem;
 }
 
 .post_settings {
@@ -115,6 +118,10 @@ max-width: 100%;
 
 }
 
+#image {
+    max-height: 60vh;
+}
+
 #image.default {
     animation-name: fadeIn;
     animation-duration: 2.5s;
@@ -130,6 +137,13 @@ if (!empty($post)) {
 
 }
 
+if (!empty($post->getImage()->getExtension())) {
+    $image = $post->getImage()->getLink();
+    $class = "";
+} else {
+    $image = "/img/uploadtext2.svg";
+    $class = "default";
+}
 
 
 ?>
@@ -140,7 +154,8 @@ if (!empty($post)) {
         <section class="img_container">
         <input required id="post_title" type="text" name="title" placeholder="Enter a post title..." <?=$readonly?> value="<?=$post->getTitle()?>">
             <figure id="droparea" class="default_drop">
-                <img src="/img/uploadtext2.svg" id="image"  class="default"/>
+
+                <img src="<?=$image?>" id="image"  class="<?=$class?>"/>
 
             </figure>
             <input required id="files" type="file" name="image">
@@ -161,6 +176,18 @@ if (!empty($post)) {
 </section>
 
 
+<?php
+
+// die(var_dump($post->getId()));
+
+// if (!$post->getId()) {
+//     echo "<script src='/js/image_upload.js'></script>";
+// }
+
+
+?>
+<script src='/js/image_upload.js'></script>
+<!-- 
 <script>
 document.getElementById("files").onchange = function () {
     var reader = new FileReader();
@@ -224,4 +251,4 @@ image.ondrop = function(evt) {
 
 };
 
-</script>
+</script> -->

@@ -39,6 +39,10 @@ a:hover {
     
 }
 
+.control.has-icons-left .input:focus~.icon {
+    color: white;
+}
+
 #new_post {
     flex-grow: 1;
     /* width: 120%; */
@@ -107,11 +111,13 @@ h5 {
 .post_info {
     display: flex;
     flex-grow: 1;
+    flex-shrink: 1;
     flex-direction: row;
     flex-wrap: wrap;
     /* min-height: 44px; */
     /* align-items: flex-end; */
     /* padding-left: .5rem; */
+    align-items: flex-end;
     justify-content: space-between;
     padding: 0 5px;
     background-color: rgba(255, 255, 255, .15);
@@ -146,6 +152,9 @@ h5 {
 .post_link {
     color: rgba(255, 255, 255, .5);
     overflow: hidden;
+    flex-grow: 12;
+    display: flex;
+    max-height: 350px;
 }
 .post_link:hover {
     color: rgba(255, 255, 255, .85);
@@ -178,17 +187,20 @@ h5 {
   }
 
 .image_container {
-    flex: 0 2 auto;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    /* flex: 0 2 auto; */
     overflow: hidden;
+    background-color: rgba(0, 0, 0, .35);
+
 }
 
 .image_container img {
     width: 100%;
-    /* max-width: 700px; */
-    object-fit: scale-down;
-    /* transform: scale(1.1); */
-    object-position: top;
-    background-color: rgba(0, 0, 0, .35);
+    height: 100%;
+    object-fit: contain;
+
 }
 
 i {

@@ -9,13 +9,17 @@ class Image {
     {
         extract($properties);
 
-        $this->id = $image_id ?? "";
+        $this->id = $image_id ?? generateUuid(16);
         $this->filename = $filename ?? "";
-        $this->extension = $extension ?? "";
+        $this->extension = $extension ?? pathinfo(self::getFilename(), PATHINFO_EXTENSION);
     }
 
     public function getId() {
         return $this->id;
+    }
+
+    public function getFilename() {
+        return $this->filename;
     }
 
     public function getExtension() {
@@ -23,6 +27,8 @@ class Image {
     }
 
     public function getLink() {
-        return "/uploads/{$this->getId()}{$this->getExtension()}";
+        if (!empty($this->id) && !empty($this->getExtension())) {
+            return "uploads/{$this->getId()}.{$this->getExtension()}";
+        }
     }
 }
