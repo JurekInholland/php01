@@ -1,10 +1,6 @@
 <style>
 
 
-    h1 {
-        font-size: 3rem;
-        color: rgba(255, 255, 255, .85);
-    }
 
     .headrow {
         display: flex;
@@ -52,7 +48,12 @@
         <?php foreach ($users as $key => $user) : ?>
             <tr>
                 <td><?=$user->getId()?></td>
-                <td><a href="/user?id=<?=$user->getId()?>"><?=$user->getName()?></a></td>
+                <td><a href="/user?id=<?=$user->getId()?>">
+                    <figure class="profile_picture">
+                        <img src="<?=$user->getProfilePicture()?>" alt="">
+                    </figure>
+                    <?=$user->getName()?>
+                </a></td>
                 <td><?=$user->getEmail()?></td>
                 <td><?=$user->getRoleName()?></td>
                 <td><?=$user->getRegistrationDate()?></td>
@@ -64,7 +65,7 @@
 
     </table>
 
-    <form action="/create" class="form" method="POST">
+    <form action="/user/create" class="form" method="GET">
         <input type="submit" name="createUser" class="button is-primary" value="Create User">
     </form>
 

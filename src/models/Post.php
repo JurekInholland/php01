@@ -34,7 +34,7 @@ class Post {
 
         
         // $this->comments = $comments;
-        $this->author = new User($properties);
+        $this->author = $author ?? new User($properties);
 
     }
 

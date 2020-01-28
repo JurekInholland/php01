@@ -34,8 +34,7 @@ h1 {
   width: 100%;
 }
 
-.auth {
-  max-width: unset;
+.container {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -43,7 +42,7 @@ h1 {
   margin: 0 1rem;
 }
 
-.site_logo {
+.container img {
   margin-top: 1rem;
   width: 75%;
   min-width: 200px;
@@ -66,19 +65,24 @@ h1 {
   cursor: pointer;
 }
 
-#password {
-  margin-bottom: 0;
-}
+
 </style>
 
-<div class="container auth">
-  <img class="site_logo" src="/img/logo.svg" alt="">
-  <form action="/login/submit" class="auth_form" method="POST">
-      <h1>Sign in</h1>
+<div class="container">
+  <img src="/img/logo.svg" alt="">
+  <form action="/register/submit" class="auth_form" method="POST">
+      <h1>Sign up</h1>
       <section class="control has-icons-left">
           <input class="input" name="username" type="text" placeholder="Username" value="">
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
+          </span>
+      </section>
+
+      <section class="control has-icons-left">
+          <input class="input" name="email" type="text" placeholder="Email" value="">
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
           </span>
       </section>
 
@@ -89,18 +93,18 @@ h1 {
           </span>
       </section>
 
-      <input type="button" onclick="this.form.submit();" name="forgot" value="Forgot password?" id="forgot">
-
-
-      <?php if (!empty($_SESSION["loginMsg"])) : ?>
-        <p class="help is-danger"><?=$_SESSION["loginMsg"]?></p>
-
-      <?php endif; ?>
-
-      <section class="control">
-      <input type="submit" name="submitBtn" value="Sign in" class="button is-primary">
-
+      <section class="control has-icons-left" id="password2" >
+          <input class="input" type="text" placeholder="Retype password" name="retype_password" value="">
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
       </section>
 
+
+
+      <section class="control">
+        <input type="submit" name="submitBtn" value="Sign up" class="button is-primary">
+
+      </section>
   </form>
 </div>

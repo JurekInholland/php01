@@ -44,4 +44,6 @@ App::bind("db", new QueryBuilder(
     Connection::make($config)
 ));
 
+App::bind("user", UserService::getCurrentUser());
+
 session_start();

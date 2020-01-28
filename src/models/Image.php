@@ -9,8 +9,13 @@ class Image {
     {
         extract($properties);
 
-        $this->id = $image_id ?? generateUuid(16);
-        $this->filename = $filename ?? "";
+        if (isset($filename)) {
+            $this->id = $image_id ?? generateUuid(16);
+            $this->filename = $filename;
+        } else {
+            $this->id = null;
+            $this->filename = null;
+        }
         $this->extension = $extension ?? pathinfo(self::getFilename(), PATHINFO_EXTENSION);
     }
 

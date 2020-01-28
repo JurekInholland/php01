@@ -2,8 +2,10 @@
 
 class PostService {
 
+    // TODO: check needed ?
     public function getPostComments($postId) {
-        $sql = "SELECT * FROM cms_comments
+        $sql = "SELECT *, cms_users.* FROM cms_comments
+        LEFT JOIN cms_users ON cms_users.id = cms_comments.user_id
         WHERE post = :post";
 
         $params = [":post" => $postId];
@@ -78,6 +80,9 @@ class PostService {
 
 
     public function createPost(Post $post) {
+
+        // die(var_dump($post));
+
         $sql = "INSERT INTO cms_posts (post_title, post_content, slug, privacy, post_image, user_id)
                 VALUES (:post_title, :post_content, :slug, :privacy, :post_image, :user_id)";
 
@@ -86,7 +91,7 @@ class PostService {
                    ":slug" => $post->getSlug(),
                    ":privacy" => $post->getPrivacy(),
                    ":post_image" => $post->getImageId(),
-                   ":user_id" => 3
+                   ":user_id" => $post->getAuthor()->getId()
         ];
         App::get("db")->query($sql, $params);
         
@@ -98,7 +103,9 @@ class PostService {
     }
 
     public function deletePostById($postId) {
-
+        $sql = "DELETE FROM cms_posts WHERE post_id=:post_id";
+        $params = [":post_id" => $postId];
+        App::get("db")->query($sql, $params);
     }
 
     private function validateImage() {
@@ -108,5 +115,37 @@ class PostService {
     public function uploadImages(array $images) {
         $sql = "INSERT INTO cms_images (image_id, filename, extension) VALUES
                 ()";
+    }
+
+    public function createComment(Comment $comment) {
+        $sql = "INSERT INTO cms_comments (comment_text, user_id, post) VALUES
+        (:comment_text, :user_id, :post)";
+
+        $params = [
+            ":comment_text" => $comment->getContent(),
+            ":user_id" => $comment->getAuthor()->getId(),
+            ":post" => $comment->getPostId()
+        ];
+
+        App::get("db")->query($sql, $params);
+    }
+
+    public function getComments($postId) {
+        $sql = "SELECT *, cms_users.* FROM cms_comments
+        LEFT JOIN cms_users ON cms_users.id = cms_comments.user_id
+        LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
+        WHERE post=:post
+        ORDER BY comment_date DESC";
+
+        $params = [":post" => $postId];
+
+        $commentdata = App::get("db")->query($sql, $params);
+
+        foreach ($commentdata as $comment) {
+            $comments[] = new Comment($comment);
+        }
+        // die(var_dump($comments[0]));
+
+        return $comments ?? [];
     }
 }

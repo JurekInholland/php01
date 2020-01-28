@@ -11,7 +11,7 @@ class UploadService {
 
     public static function upload(array $image) {
 
-        $image = $_FILES['image'];
+        // $image = $_FILES['image'];
         
         // die(var_dump($image));
 
@@ -20,7 +20,7 @@ class UploadService {
 
             $img = self::moveImage($image);
 
-            return ["id" => $img->getId()];
+            return ["id" => $img->getId(), "filename" => $img->getFilename()];
 
 
         // Catch and return exception

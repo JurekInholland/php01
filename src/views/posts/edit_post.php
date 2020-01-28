@@ -11,9 +11,21 @@
     /* height: 800px; */
     min-height: calc(100vh - 56px);
 }
+
 .form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    width: 100%;
+    margin-bottom: 0;
+
+
+}
+
+.main {
     background-color: rgba(0, 0, 0, .25);
-    flex: 6 0 auto;
+    flex: 6 1 auto;
     /* flex-basis: auto; */
     align-content: stretch;
 
@@ -23,20 +35,20 @@
     min-width: 300px;
     /* min-width: 500px; */
     padding: 1rem;
-    /* justify-content: center; */
-    align-items: center;
+    justify-content: center;
+    /* align-items: center; */
 }
-.form input::placeholder, .form textarea::placeholder {
+.main input::placeholder, .main textarea::placeholder {
     color:rgba(255, 255, 255, .55);
 }
-.form input, .form textarea {
+.main input, .main textarea {
     width: 100%;
     border: none;
     background-color: transparent;
     margin-top: 1rem;
 }
 
-.form textarea {
+.main textarea {
     font-size: 1.25rem;
     color:rgba(255, 255, 255, .85);
     resize: none;
@@ -50,10 +62,19 @@
     background-color: rgba(0, 0, 0, .5);
     flex: 1 1 auto;
     min-width: 200px;
-    min-height: 300px;
-
+    min-height: 100px;
 }
-.form img {
+
+.post_settings a {
+    font-weight: normal;
+}
+
+.post_settings ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    margin-left: .5rem;
+}
+.main img {
 /* object-fit: scale-down; */
 max-width: 100%;
 }
@@ -62,6 +83,7 @@ max-width: 100%;
     font-weight: bold;
     color:rgba(255, 255, 255, .95);
     margin-bottom: .75rem;
+    margin-top: 0;
 }
 
 .img_container {
@@ -140,9 +162,11 @@ if (!empty($post)) {
 if (!empty($post->getImage()->getExtension())) {
     $image = $post->getImage()->getLink();
     $class = "";
+    $fileInput = false;
 } else {
     $image = "/img/uploadtext2.svg";
     $class = "default";
+    $fileInput = true;
 }
 
 
@@ -150,6 +174,8 @@ if (!empty($post->getImage()->getExtension())) {
 
 <section class="create_container">
     <form action="/post/submit" method="POST" class="form" enctype="multipart/form-data">
+    <section class="main">
+
         <input type="hidden" name="post_id" value="<?=$post->getId()?>">
         <section class="img_container">
         <input required id="post_title" type="text" name="title" placeholder="Enter a post title..." <?=$readonly?> value="<?=$post->getTitle()?>">
@@ -158,97 +184,37 @@ if (!empty($post->getImage()->getExtension())) {
                 <img src="<?=$image?>" id="image"  class="<?=$class?>"/>
 
             </figure>
-            <input required id="files" type="file" name="image">
+
+            <?php if ($fileInput) : ?>
+                <input required id="files" type="file" name="image">
+
+            <?php endif; ?>
+
         <textarea required id="description" name="content" placeholder="Add a description..." <?=$readonly?>><?=$post->getContent()?></textarea>
         <input type="submit" name="" class="button is-primary">
-
         </section>
 
-    </form>
+    </section>
+
 
     <section class="post_settings">
         <ul>
-            <li>set to private</li>
-            <li>download image</li>
-            <li>delete post</li>
+            <li>
+                <label class="checkbox">
+                <input type="checkbox">
+                    Make private
+                </label>
+            </li>
+            <li>
+                <a class="not-active" href="<?=$post->getImage()->getLink()?>">Download image</a>
+            </li>
+            <li>
+                <a href="/post/delete?id=<?=$post->getId()?>">Delete post</a>
+            </li>
         </ul>
     </section>
 </section>
-
-
-<?php
-
-// die(var_dump($post->getId()));
-
-// if (!$post->getId()) {
-//     echo "<script src='/js/image_upload.js'></script>";
-// }
-
-
-?>
+</form>
 <script src='/js/image_upload.js'></script>
-<!-- 
-<script>
-document.getElementById("files").onchange = function () {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-
-        displayImage(e);
-    };
-
-    // reader.readAsDataURL(this.files[0]);
-
-    // read the image file as a data URL.
-    try {
-        reader.readAsDataURL(this.files[0]);
-
-    // If open file dialog was canceled
-    } catch(TypeError) {
-        if (files.files.length == 0) {
-            image.src = "/img/uploadtext2.svg";
-            droparea.classList.remove("has_img");
-            image.classList.remove("active");
-            image.classList.add("default");
-
-        }
-
-    }
-
-};
-
-function displayImage(e) {
-    image.src = e.target.result;
-    image.classList.remove("default");
-    image.classList.add("active");
-    
-    // image.classList.remove("default");
-    droparea.classList.add("has_img");
-}
-
-image.ondragover = image.ondragenter = function(evt) {
-  evt.preventDefault();
-  droparea.classList.add("drop");
-};
-
-image.ondragleave = function(evt) {
-    evt.preventDefault();
-    droparea.classList.remove("drop");
-}
 
 
-post_title.ondrop = description.ondrop = function(evt) {
-    evt.preventDefault();
-}
-
-image.ondrop = function(evt) {
-    files.files = evt.dataTransfer.files;
-    evt.preventDefault();
-    droparea.classList.remove("drop");
-    var event = new Event('change');
-    files.dispatchEvent(event);
-// Dispatch it.
-
-};
-
-</script> -->

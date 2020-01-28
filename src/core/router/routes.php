@@ -7,11 +7,27 @@ $router->get("", "StaticController@index");
 $router->get("users", "UserController@users");
 $router->get("user", "UserController@user");
 
+$router->get("user/edit", "UserController@editProfile");
+$router->get("user/create", "UserController@createUser");
+
+
+
+$router->post("user/submit", "UserController@submitProfile");
+
+$router->post("user/edit/submit", "UserController@submitEdit");
+
+
+
+$router->post("comment/submit", "PostController@submitComment");
+
+
+
 $router->get("login", "AuthController@login");
 $router->get("logout", "AuthController@logout");
 $router->get("register", "AuthController@register");
 
 $router->get("edit", "PostController@editPost");
+$router->get("view", "PostController@viewPost");
 
 
 
@@ -21,6 +37,7 @@ $router->post("register/submit", "AuthController@submitRegister");
 
 
 $router->post("post/submit", "PostController@submitPost");
+$router->get("post/delete", "PostController@deletePost");
 
 
 

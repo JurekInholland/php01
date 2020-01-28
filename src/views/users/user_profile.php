@@ -1,48 +1,5 @@
 
 <style>
-.profile_info {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 1rem;
-    justify-content: space-around;
-
-}
-
-
-.profile_picture {
-    position: relative;
-    border-radius: 50%;
-    width: 50%;
-    height: auto;
-    overflow: hidden;
-    max-width: 300px;
-    /* margin-right: 2rem;
-    margin-bottom: 1rem; */
-    margin-bottom: 1rem;
-}
-
-
-.profile_picture:after {
-  content: "";
-  display: block;
-  padding-bottom: 100%;
-}
-
-.profile_picture img {
-    position: absolute;
-    /* object-fit: contain;
-    object-position: center;
-    width: 100%;
-    height: 100%; */
-}
-
-.table {
-    width: 100%;
-}
-#change_profile_btn {
-    width: 100%;
-}
 
 </style>
 
@@ -93,11 +50,13 @@
                 </tbody>
             </table>
 
-            <section class="buttons">
-                <input id="change_profile_btn" type="submit" class="button is-primary is-fullwidth" value="Edit Profile">
+                <form action="/user/submit" method="POST" class="buttons">
+                    <input name="id" type="hidden" value="<?=$user->getId()?>">
+                    <input name="edit" id="change_profile_btn" type="submit" class="button is-primary is-fullwidth" value="Edit Profile">
 
-                <input id="change_profile_btn" type="submit" class="button is-danger" value="Delete User">
-            </section>
+                    <input name="delete" id="change_profile_btn" type="submit" class="button is-danger" value="Delete User">
+                </form>
+
 
 
 
@@ -108,19 +67,26 @@
 
         </section>
 
+
     </section>
 
 
 
+    <hr>
+    <h1>Posts by <?=$user->getNameCapitalized()?></h1>
+
     <?php if (!empty($posts)) : ?>
-        <hr>
-        <h1>Posts by <?=$user->getNameCapitalized()?></h1>
+
         <section id='post_grid'>
             <?php foreach ($posts as $post) : ?>
             
                 <?php require "../src/views/posts/overview_post.php"; ?>
             <?php endforeach; ?>
         </section>
+
+    <?php else : ?>
+    <p>This user does not have any posts yet.</p>
+
     <?php endif; ?>
 
 </section>

@@ -9,6 +9,8 @@ class User {
     protected $registrationDate;
     protected $profileImage;
     protected $postCount;
+    protected $loggedIn = false;
+
 
     public function __construct($properties)
     {
@@ -33,6 +35,13 @@ class User {
         }
     }
 
+    public function setLoggedIn() {
+        $this->loggedIn = true;
+    }
+    public function isLoggedIn() {
+        return $this->loggedIn;
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -49,6 +58,10 @@ class User {
         return $this->email;
     }
 
+    public function getPassword() {
+        return $this->password;
+    }
+
     public function getRole() {
         return $this->role;
     }
@@ -61,11 +74,16 @@ class User {
         return $this->registrationDate;
     }
 
+
+    public function getPictureId() {
+        return $this->profileImage->getId();
+    }
+
     public function getProfilePicture() {
         // die(var_dump($this->profileImage));
 
         if (!empty($this->profileImage->getLink())) {
-            return $this->profileImage->getLink();
+            return "/{$this->profileImage->getLink()}";
         }
 
         // Return default profile picture of none was set

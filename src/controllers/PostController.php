@@ -12,25 +12,47 @@ class PostController extends Controller {
     public function editPost() {
         if (isset($_GET["post"])) {
             $post = PostService::getPostBySlug($_GET["post"]);
-            return self::view("posts/edit_post", ["readonly" => "readonly", "post" => $post[0]]);
+
+            $comments = PostService::getComments($post[0]->getId());
+            return self::view("posts/edit_post", ["readonly" => "readonly", "post" => $post[0], "comments" => $comments]);
         }
+    }
+
+    public function viewPost() {
+        if (isset($_GET["post"])) {
+            $post = PostService::getPostBySlug($_GET["post"]);
+
+            $comments = PostService::getComments($post[0]->getId());
+            return self::view("posts/view_post", ["readonly" => "readonly", "post" => $post[0], "comments" => $comments]);
+        }
+    }
+
+    public function deletePost() {
+        if (!empty($_GET["id"])) {
+            PostService::deletePostById($_GET["id"]);
+        }
+        return self::redirect("");
     }
 
     public function submitPost() {
         if (!empty($_POST)) {
-            // die(var_dump($_POST));
-            $imgId = UploadService::upload($_FILES["image"]);
+            // die(var_dump(App::get("user")));
+            $image = UploadService::upload($_FILES["image"]);
+
             
+
             $postValues = [
                 "post_title" => $_POST["title"],
                 "post_content" => $_POST["content"],
                 "privacy" => 0,
                 "slug" => createSlug($_POST["title"]),
-                "image_id" => $imgId["id"]
+                "image_id" => $image["id"],
+                "filename" => $image["filename"],
+                "author" => App::get("user")
             ];
 
             $post = new Post($postValues);
-
+            // die(var_dump($post));
             PostService::createPost($post);
             self::redirect("");
             
@@ -38,6 +60,21 @@ class PostController extends Controller {
             if ($_POST["post_id"] == "") {
                 // PostService::createPost();
             }
+        }
+    }
+
+    public function submitComment() {
+
+        if (!empty($_POST)) {
+            $comment = new Comment([
+                "comment_text" => $_POST["comment"],
+                "post" => $_POST["post_id"],
+                "author" => App::get("user"),
+                ""
+            ]);
+
+            PostService::createComment($comment);
+            return self::redirect("view?post={$_POST["post_slug"]}");
         }
     }
 }
