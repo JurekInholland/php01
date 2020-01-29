@@ -42,6 +42,11 @@ class UserController extends Controller {
 
     public function editProfile() {
         if (isset($_GET["id"])) {
+
+            if (!self::adminPrivileges($_GET["id"])) {
+                return self::view("partials/message", ["message" => "You are not authorized to edit this profile."]);
+            }
+
             $user = UserService::getUserById($_GET["id"]);
         } elseif (isset($_GET["name"])) {
             $user = UserService::getUserByName($_GET["name"]);
@@ -57,27 +62,51 @@ class UserController extends Controller {
 
     public function submitProfile() {
         $id = $_POST["id"];
+        $currentUser = App::get("user");
+
+        if ($currentUser->getRole() < 2 && $currentUser->getId() != $_POST["id"]) {
+            return self::view("partials/message", ["message" => "You are not authorized to do this."]);
+        }
 
         if (isset($_POST["edit"])) {
+
             return self::redirect("user/edit?id={$id}");
 
         } elseif (isset($_POST["delete"])) {
             UserService::deleteUser($id);
-            return self::redirect("users");
+
+        } elseif (isset($_POST["login_on_behalf"])) {
+            UserService::loginAs($id);
         }
+        return self::redirect("users");
+
     }
 
+    // Check if the user with the given id is authorized. Either by having the same id
+    // or by having a role of Administrator or Superadministrator.
+    private static function adminPrivileges($id) {
+        $currentUser = App::get("user");
+        if ($currentUser->getRole() < 2 && $currentUser->getId() != $id) {
+            return false;
+        }
+        return true;
+    }
 
     public function submitEdit() {
 
-        $imageId = "";
-        if (!empty($_FILES["profile_image"]["name"])) {
-            $image = UploadService::upload($_FILES["profile_image"]);
-            $imageId = $image["id"];
+        $user = App::get("user");
+
+        if ($user->getId() != $_POST["id"]) {
+            if ($user->getRole() < 2) {
+                return self::view("partials/message", ["message" => "You are not authorized to edit this profile."]);
+            }
         }
 
-
-
+        $imageId = "";
+        if (!empty($_FILES["profile_image"]["name"])) {
+            $image = ImageService::upload($_FILES["profile_image"]);
+            $imageId = $image["id"];
+        }
 
         $userinfo = [
             "id" => $_POST["id"],            

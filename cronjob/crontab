@@ -1,0 +1,2 @@
+0 * * * * root echo "Hello world" >> /var/log/cron.log 2>&1
+# Curl cronjob api endpoint every hour at minute 0.

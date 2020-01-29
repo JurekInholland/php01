@@ -34,7 +34,8 @@ h1 {
   width: 100%;
 }
 
-.container {
+.auth {
+  max-width: unset;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -42,13 +43,12 @@ h1 {
   margin: 0 1rem;
 }
 
-.container img {
+.site_logo {
   margin-top: 1rem;
   width: 75%;
   min-width: 200px;
   max-width: 500px;
 }
-
 #forgot {
   text-align: end;
   margin-top: .25rem;
@@ -68,8 +68,8 @@ h1 {
 
 </style>
 
-<div class="container">
-  <img src="/img/logo.svg" alt="">
+<div class="container auth">
+  <img class="site_logo" src="/img/logo.svg" alt="">
   <form action="/register/submit" class="auth_form" method="POST">
       <h1>Sign up</h1>
       <section class="control has-icons-left">

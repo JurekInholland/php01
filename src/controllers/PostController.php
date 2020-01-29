@@ -37,7 +37,7 @@ class PostController extends Controller {
     public function submitPost() {
         if (!empty($_POST)) {
             // die(var_dump(App::get("user")));
-            $image = UploadService::upload($_FILES["image"]);
+            $image = ImageService::upload($_FILES["image"]);
 
             
 
@@ -65,7 +65,12 @@ class PostController extends Controller {
 
     public function submitComment() {
 
-        if (!empty($_POST)) {
+        if (App::get("user")->getRole() == 0) {
+            $_SESSION["loginMsg"] = "You must be logged in to post comments.";
+            return self::redirect("login");
+        }
+
+        if (!empty($_POST["comment"])) {
             $comment = new Comment([
                 "comment_text" => $_POST["comment"],
                 "post" => $_POST["post_id"],
@@ -76,5 +81,7 @@ class PostController extends Controller {
             PostService::createComment($comment);
             return self::redirect("view?post={$_POST["post_slug"]}");
         }
+        return self::view("partials/message", ["message" => "Comments cannot be empty."]);
+
     }
 }

@@ -36,4 +36,9 @@ class Image {
             return "uploads/{$this->getId()}.{$this->getExtension()}";
         }
     }
+
+    public function delete() {
+        $path = "uploads/{$this->getId()}.{$this->getExtension()}";
+        unlink($path);
+    }
 }

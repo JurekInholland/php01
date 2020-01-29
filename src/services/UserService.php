@@ -84,6 +84,7 @@ class UserService {
 
 
     public function getCurrentUser() {
+        
         if (!empty($_COOKIE["pictur_login"])) {
             $sql = "SELECT cms_login_tokens.user_id as id, cms_users.*, cms_images.* FROM cms_login_tokens
                     LEFT JOIN cms_users ON cms_login_tokens.user_id = cms_users.id
@@ -182,10 +183,13 @@ class UserService {
 
             } elseif ($key == "password") {
                 $params[$key] = password_hash($value, PASSWORD_BCRYPT);
-            }
+            } 
 
             else {
                 $params[$key] = $value;
+                if ($key == "email") {
+                    MailService::sendEmailChangedMail($currentInfo["email"], $userdata["email"]);
+                }
             }
         }
 
@@ -198,6 +202,40 @@ class UserService {
     }
 
 
+    public static function addResetPasswordToken(string $userId, string $token) {
+        $sql = "INSERT INTO cms_password_tokens (user_id, token)
+                VALUES (:user_id, :token)";
+        $params = [":user_id" => $userId, ":token" => $token];
+
+        App::get("db")->query($sql, $params);
+    }
+
+    public static function checkPasswordToken(string $userId, string $token) {
+        
+        $lastHour = date("Y-m-d H:i:s", time() - 3600);
+        
+        
+        $sql = "SELECT token FROM cms_password_tokens
+                WHERE user_id=:user_id AND token=:token
+                AND token_date > :last_hour";
+        $params = [":user_id" => $userId, ":token" => $token, ":last_hour" => $lastHour];
+
+        $result = App::get("db")->query($sql, $params);
+        if (count($result) >= 1) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function deletePasswordToken(string $token) {
+        $sql = "DELETE FROM cms_password_tokens
+                WHERE token=:token";
+
+        $params = [":token" => $token];
+
+        App::get("db")->query($sql, $params);
+    }
 
     public function login(array $credentials) {
         $sql = "SELECT * FROM cms_users
@@ -216,6 +254,25 @@ class UserService {
             return self::storeLogin($user);
         }
         return "Password does not match.";
+    }
+
+    public function loginViaToken($token) {
+        $sql = "SELECT * FROM cms_users
+                LEFT JOIN cms_password_tokens ON cms_users.id = cms_password_tokens.user_id
+                WHERE cms_password_tokens.token = :token";
+        $params = [":token" => $token];
+
+        $userdata = App::get("db")->query($sql, $params);
+
+        if (!empty($userdata[0])) {
+            $user = new User($userdata[0]);
+            return self::storeLogin($user);
+        }
+    }
+
+    public function loginAs(string $userId) {
+        $user = new User(["id" => $userId]);
+        self::storeLogin($user);
     }
 
     private static function storeLogin(User $user) {

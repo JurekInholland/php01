@@ -38,3 +38,8 @@ services:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.3/fpm/conf.d/99-overrides.ini
 
+
+    crontab:
+      build: cronjob
+      container_name: php01-cronjob
+      working_dir: /application

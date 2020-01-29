@@ -11,6 +11,8 @@ $router->get("user/edit", "UserController@editProfile");
 $router->get("user/create", "UserController@createUser");
 
 
+$router->get("resetpassword", "AuthController@resetPassword");
+
 
 $router->post("user/submit", "UserController@submitProfile");
 

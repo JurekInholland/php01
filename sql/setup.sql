@@ -1,9 +1,10 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS cms_users, cms_comments, cms_images, cms_login_tokens, cms_posts, cms_role_names, cms_api_keys;
+DROP TABLE IF EXISTS cms_users, cms_comments, cms_images, cms_login_tokens, cms_posts, cms_role_names, cms_api_keys, cms_password_tokens;
 SET FOREIGN_KEY_CHECKS=1;
 
 ALTER DATABASE projectdb CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
+SET time_zone = "+1:00";
 
 CREATE TABLE `cms_users` (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -54,15 +55,25 @@ CREATE TABLE `cms_comments` (
 )ENGINE=InnoDB;
 
 
-
 CREATE TABLE `cms_login_tokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` char(64) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `cms_login_tokens_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
 
-) ENGINE=InnoDB;
+
+CREATE TABLE `cms_password_tokens` (
+    `token_id` INT(11) NOT NULL AUTO_INCREMENT,
+    `user_id` INT(11) NOT NULL,
+    `token` CHAR(32) NOT NULL COLLATE 'utf8_bin',
+    `token_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`token_id`),
+    INDEX `FK_cms_password_tokens_cms_users` (`user_id`),
+    CONSTRAINT `FK_cms_password_tokens_cms_users` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON UPDATE CASCADE ON DELETE CASCADE
+)ENGINE=InnoDB;
+
 
 CREATE TABLE `cms_role_names` (
     `role_id` INT(11) NULL DEFAULT NULL,
@@ -76,8 +87,19 @@ CREATE TABLE `cms_api_keys` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `cms_api_keys_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `cms_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB;
+)ENGINE=InnoDB;
 
+CREATE TABLE `cms_jobs` (
+	`job_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`job_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`status` TINYINT(4) NULL DEFAULT NULL,
+	PRIMARY KEY (`job_id`)
+)ENGINE=InnoDB;
+
+CREATE TABLE `cms_settings` (
+	`cronjob_key` CHAR(16) NULL DEFAULT NULL,
+	`job_interval` SMALLINT(6) NULL DEFAULT NULL
+)ENGINE=InnoDB;
 
 -- INSERT INTO cms_users (id, name, email, password, role) VALUES
 -- (1, 'admin', 'admin@mail.com', 'asd', 1),

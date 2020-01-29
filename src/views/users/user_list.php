@@ -13,6 +13,38 @@
     .searchform {
         margin: 0;
     }
+
+    .user_col {
+        align-self: center;
+        justify-content: center;
+        align-items: center;
+        /* display: flex; */
+
+        /* height: 4rem; */
+        /* display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: 400px; */
+    }
+
+    .user_col figure {
+        align-self: center;
+        max-width: 25px;
+        max-height: 25px;
+        margin-right: .5rem;
+    }
+
+    /* .user_col img {
+        width: 100%;
+        height: 100%;
+    } */
+
+    .user_col a {
+        display: inline-flex;
+        align-self: center;
+        justify-self: center;
+        align-items: center;
+    }
 </style>
 
 
@@ -35,10 +67,11 @@
     <thead>
 
         <tr>
-            <th>User Id</th>
+            <th>Id</th>
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Posts</th>
             <th>Registration Date</th>
         </tr>
 
@@ -48,7 +81,9 @@
         <?php foreach ($users as $key => $user) : ?>
             <tr>
                 <td><?=$user->getId()?></td>
-                <td><a href="/user?id=<?=$user->getId()?>">
+                <td class="user_col">
+                
+                    <a href="/user?id=<?=$user->getId()?>">
                     <figure class="profile_picture">
                         <img src="<?=$user->getProfilePicture()?>" alt="">
                     </figure>
@@ -56,6 +91,7 @@
                 </a></td>
                 <td><?=$user->getEmail()?></td>
                 <td><?=$user->getRoleName()?></td>
+                <td><?=$user->getPostCount()?></td>
                 <td><?=$user->getRegistrationDate()?></td>
             </tr>
             

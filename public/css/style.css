@@ -75,7 +75,7 @@ a:hover {
 
 .container {
     padding: 1rem;
-    min-height: calc(100vh - 56px);
+    min-height: calc(100vh - 52px);
     
 }
 
@@ -207,8 +207,7 @@ h5 {
     flex-wrap: wrap;
     flex-direction: row;
     width: 100%;
-    padding: 1rem;
-  
+    padding: 1rem;  
   }
   
   #post_grid article {
@@ -314,6 +313,7 @@ i {
     flex-wrap: wrap;
     margin: 1rem;
     justify-content: space-around;
+    align-items: center;
 
 }
 
@@ -326,6 +326,7 @@ i {
     height: auto;
     overflow: hidden;
     max-width: 300px;
+    max-height: 300px;
     /* margin-right: 2rem;
     margin-bottom: 1rem; */
     /* margin-bottom: 1rem; */

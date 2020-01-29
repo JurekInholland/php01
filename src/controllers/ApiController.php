@@ -38,11 +38,18 @@ class ApiController extends Controller {
 
 
     public function cronjob() {
-        if (empty($_GET["cronjobkey"])) {
-            return self::returnResponse([], 401);
-        }
+        if (!empty($_GET["cronjobkey"])) {
+            $key = CronjobService::getCronjobKey();
 
-        
+            if ($_GET["cronjobkey"] == $key) {
+
+                // Execute periodic tasks
+                CronjobService::doTasks();
+                return self::returnResponse([], 200);
+            }
+
+        }
+        return self::returnResponse([], 401);
 
     }
 

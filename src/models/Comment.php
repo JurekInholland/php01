@@ -42,7 +42,7 @@ class Comment {
 
     public function getDate() {
         $date = new DateTime($this->date);
-        return $date->format('d.m H:i');
+        return $date->format('d.m.y H:i');
     }
 
     public function getPostId() {

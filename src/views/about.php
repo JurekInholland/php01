@@ -1,23 +1,22 @@
 <style>
-.container {
+
+.centered {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 52px);
 }
 
 .about {
+    margin-top: 2rem;
     background-color: rgba(255, 255, 255, .25);
-    padding: 1rem 2rem;
+    padding: 2rem;
     border-radius: 5px;
-    max-width: 700px;
-    justify-content: center;
-    align-items: center;
 }
+
 </style>
 
-<section class="container">
+<section class="centered">
 
     <section class="about">
         <h1>About</h1>

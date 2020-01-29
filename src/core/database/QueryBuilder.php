@@ -6,6 +6,7 @@ class QueryBuilder {
 
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
+        $this->pdo->exec("SET time_zone='+01:00';");
     }
 
     // Query SQL using prepared statements

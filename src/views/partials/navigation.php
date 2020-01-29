@@ -63,7 +63,9 @@ a.dropdown-item:hover {
 }
 
 .navbar .profile_picture {
-  margin-right: 1rem;
+  margin-right: .5rem;
+  width: 35px;
+  height: 35px;
 }
 
 .navbar>.container {
@@ -71,6 +73,9 @@ a.dropdown-item:hover {
   min-height: 0px;
 }
 
+.navbar-item img {
+  max-height: unset;
+}
 
 /* #new_post {
   min-height: 10px;

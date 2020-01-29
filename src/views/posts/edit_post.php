@@ -9,7 +9,7 @@
     align-items: stretch;
     align-content: stretch;
     /* height: 800px; */
-    min-height: calc(100vh - 56px);
+    min-height: calc(100vh - 52px);
 }
 
 .form {

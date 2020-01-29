@@ -1,6 +1,6 @@
 <?php
 
-class UploadService {
+class ImageService {
 
     // Max size: 2 MB
     protected static $maxSize = 2 * 10e6;
@@ -8,6 +8,23 @@ class UploadService {
     // Allow jpg, png and gif
     protected static $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
+    // Delete images that are neither referenced as post image nor user avatar.
+    public static function deleteStaleImages() {
+        $sql = "DELETE cms_images FROM cms_images
+                LEFT JOIN cms_posts ON cms_posts.post_image = cms_images.image_id
+                LEFT JOIN cms_users ON cms_users.profile_image = cms_images.image_id
+                WHERE id IS NULL AND post_id IS NULL";
+        App::get("db")->query($sql);
+    }
+
+    // Get ids of images that are neither referenced as post image nor user avatar.
+    public static function getStaleImageIds() {
+        $sql = "SELECT cms_images.* FROM cms_images
+                LEFT JOIN cms_posts ON cms_posts.post_image = cms_images.image_id
+                LEFT JOIN cms_users ON cms_users.profile_image = cms_images.image_id
+                WHERE id IS NULL AND post_id IS NULL";
+        return App::get("db")->query($sql);
+    }
 
     public static function upload(array $image) {
 
@@ -23,7 +40,7 @@ class UploadService {
             return ["id" => $img->getId(), "filename" => $img->getFilename()];
 
 
-        // Catch and return exception
+        // Catch and return exception occuring during validation
         } catch (Exception $e) {
             return ["error" => $e];
         }

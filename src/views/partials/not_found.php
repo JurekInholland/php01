@@ -10,7 +10,7 @@
     margin: 0 auto;
     margin-top: 1rem;
     max-width: 700px;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 52px);
 }
 
 .error404 h1 {

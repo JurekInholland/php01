@@ -1,6 +1,8 @@
 
 <style>
-
+.profile_buttons input {
+    margin-bottom: .5rem;
+}
 </style>
 
 
@@ -50,20 +52,18 @@
                 </tbody>
             </table>
 
-                <form action="/user/submit" method="POST" class="buttons">
+                <form action="/user/submit" method="POST" class="profile_buttons">
                     <input name="id" type="hidden" value="<?=$user->getId()?>">
-                    <input name="edit" id="change_profile_btn" type="submit" class="button is-primary is-fullwidth" value="Edit Profile">
+                    <input name="edit" id="change_profile_btn" type="submit" class="button is-primary " value="Edit Profile">
 
-                    <input name="delete" id="change_profile_btn" type="submit" class="button is-danger" value="Delete User">
+
+                    <?php if (App::get("user")->getRole() > 1 && $user->getRole() == 1) : ?>
+                        <input name="delete" id="change_profile_btn" type="submit" class="button is-danger" value="Delete User">
+                        <input name="login_on_behalf" id="change_profile_btn" type="submit" class="button is-info" value="Login as">
+                    <?php endif; ?>
+
+
                 </form>
-
-
-
-
-            <!-- <p>Id:asdasdasdasdsa <?=$user->getId()?></p>
-            <p>Id: asdasdasdasdasd<?=$user->getId()?></p>
-            <p>Id:asdasdasdad <?=$user->getId()?></p>
-            <p>Id:asdasdasdasd <?=$user->getId()?></p> -->
 
         </section>
 
