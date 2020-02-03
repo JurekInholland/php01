@@ -22,6 +22,8 @@ class Post {
 
         if (!empty($post_date)) {
             $this->date = new DateTime($post_date);
+        } else {
+            $this->date = new DateTime();
         }
 
         if (!empty($image_id)) {
@@ -58,6 +60,11 @@ class Post {
         return $this->date->format("d.m.Y");
     }
 
+    public function getDateAndTime() {
+        return $this->date->format("d.m.Y H:i:s");
+
+    }
+
     public function getImage() {
         return $this->image;
     }
@@ -89,6 +96,7 @@ class Post {
             "id" => $this->getId(),
             "title" => $this->getTitle(),
             "content" => $this->getContent(),
+            "date" => $this->getDateAndTime(),
             "image_id" => $this->getImage()->getId() ?? "",
             "author" => $this->getAuthor()->getName(),
             "link" => $this->getViewLink()

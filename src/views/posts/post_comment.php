@@ -89,6 +89,10 @@
     color: rgba(255, 255, 255, .65)
 }
 
+.comment_content {
+    margin-right: 1rem;
+}
+
 </style>
 
 

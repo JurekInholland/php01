@@ -136,20 +136,20 @@ INSERT INTO `cms_images` (`image_id`, `filename`, `extension`) VALUES ('tStcL7St
 INSERT INTO `cms_images` (`image_id`, `filename`, `extension`) VALUES ('WfusXJqDfo2PEFeC', 'fruit_collider.png', 'png');
 INSERT INTO `cms_images` (`image_id`, `filename`, `extension`) VALUES ('ZOxPOsaHR4V2fQAt', 'arles66.jpg', 'jpg');
 
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Bulb Fields', 'Bulb Fields\r\nApril 1883, The Hague\r\nOil on canvas on panel, 48 x 65 cm', 'bulb-fields', 0, '2020-01-30 10:10:26', 'rvzuRQ25FYVQUG2B', 5);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Some nice shoes', 'A Pair of Leather Clogs\r\nSpring 1889, Arles\r\nOil on canvas, 33 x 41 cm', 'some-nice-shoes', 0, '2020-01-30 10:11:18', 'ZOxPOsaHR4V2fQAt', 5);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('La Crau with Peach Trees in Blossom', 'La Crau with Peach Trees in Blossom\r\nApril 1889, Arles\r\nOil on canvas, 65 x 81 cm', 'la-crau-with-peach-trees-in-blossom', 0, '2020-01-30 10:11:43', 'HrTeD9H35ZbVWQCp', 5);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Houses in Auvers', 'Houses in Auvers\r\nMay 1890, Auvers-sur-Oise\r\nOil on canvas, 72 x 61 cm', 'houses-in-auvers', 0, '2020-01-30 10:12:54', 'mJMP8eieen5muaW3', 5);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('The Night CafÃ© in the Place Lamartine in Arles', 'The Night CafÃ© in the Place Lamartine in Arles\r\nSeptember 1888, Arles\r\nWatercolour, 444 x 632 mm', 'the-night-caf-in-the-place-lamartine-in-arles', 0, '2020-01-30 10:13:57', '2xW2crjMc9OcYKcK', 5);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Vibin with the crew', 'I have many friends', 'vibin-with-the-crew', 0, '2020-01-30 10:30:37', 'R5pRS3HSYG7aSTNy', 4);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Major in the Universe', 'Permanent link to this comic: https://xkcd.com/863/', 'major-in-the-universe', 0, '2020-01-30 10:34:32', 'IKOLf7cJsIlfgoUx', 6);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Logical', 'Permanent link to this comic: https://xkcd.com/1901/', 'logical', 0, '2020-01-31 06:44:21', 'KqDg4MbKZtxWzAnY', 6);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Fruit Collider', 'Permanent link to this comic: https://xkcd.com/1949/\r\n', 'fruit-collider', 0, '2020-01-31 06:45:28', 'WfusXJqDfo2PEFeC', 6);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('The History of Unicode', 'Permanent link to this comic: https://xkcd.com/1953/', 'the-history-of-unicode', 0, '2020-01-31 07:01:13', 'nJqsQyEHja0H78JJ', 6);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('The Bombardment of Algiers', 'Drawn in 1816.', 'the-bombardment-of-algiers', 0, '2020-01-31 07:10:20', 'ePpb7opBCzN0rZfm', 7);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('The Battle of The Saints', 'Some battleships', 'the-battle-of-the-saints', 0, '2020-01-31 07:11:14', 'jqrrEItKvbaawkEt', 7);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Battle of Cape St. Vincent', 'pew pew pew', 'battle-of-cape-st-vincent', 0, '2020-01-31 07:36:03', 'tStcL7StPkgfHknK', 7);
-INSERT INTO `cms_posts` (`post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES ('Code quality', 'Permanent link to this comic: https://xkcd.com/1695/\r\n', 'code-quality', 0, '2020-01-31 11:58:45', 'goaH34P4CSKASqON', 6);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (1, 'Bulb Fields', 'Bulb Fields\r\nApril 1883, The Hague\r\nOil on canvas on panel, 48 x 65 cm', 'bulb-fields', 0, '2020-01-30 09:10:26', 'rvzuRQ25FYVQUG2B', 5);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (2, 'Some nice shoes', 'A Pair of Leather Clogs\r\nSpring 1889, Arles\r\nOil on canvas, 33 x 41 cm', 'some-nice-shoes', 0, '2020-01-30 09:11:18', 'ZOxPOsaHR4V2fQAt', 5);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (3, 'La Crau with Peach Trees in Blossom', 'La Crau with Peach Trees in Blossom\r\nApril 1889, Arles\r\nOil on canvas, 65 x 81 cm', 'la-crau-with-peach-trees-in-blossom', 0, '2020-01-30 09:11:43', 'HrTeD9H35ZbVWQCp', 5);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (4, 'Houses in Auvers', 'Houses in Auvers\r\nMay 1890, Auvers-sur-Oise\r\nOil on canvas, 72 x 61 cm', 'houses-in-auvers', 0, '2020-01-30 09:12:54', 'mJMP8eieen5muaW3', 5);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (5, 'The Night Cafe in the Place Lamartine in Arles', 'The Night Cafe in the Place Lamartine in Arles\r\nSeptember 1888, Arles\r\nWatercolour, 444 x 632 mm', 'the-night-caf-in-the-place-lamartine-in-arles', 0, '2020-01-30 09:13:57', '2xW2crjMc9OcYKcK', 5);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (6, 'Vibin with the crew', 'I have many friends', 'vibin-with-the-crew', 0, '2020-01-30 09:30:37', 'R5pRS3HSYG7aSTNy', 4);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (7, 'Major in the Universe', 'Permanent link to this comic: https://xkcd.com/863/', 'major-in-the-universe', 0, '2020-01-30 09:34:32', 'IKOLf7cJsIlfgoUx', 6);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (8, 'Logical', 'Permanent link to this comic: https://xkcd.com/1901/', 'logical', 0, '2020-01-31 05:44:21', 'KqDg4MbKZtxWzAnY', 6);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (9, 'Fruit Collider', 'Permanent link to this comic: https://xkcd.com/1949/\r\n', 'fruit-collider', 0, '2020-01-31 05:45:28', 'WfusXJqDfo2PEFeC', 6);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (10, 'The History of Unicode', 'Permanent link to this comic: https://xkcd.com/1953/', 'the-history-of-unicode', 0, '2020-01-31 06:01:13', 'nJqsQyEHja0H78JJ', 6);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (11, 'The Bombardment of Algiers', 'Drawn in 1816.', 'the-bombardment-of-algiers', 0, '2020-01-31 06:10:20', 'ePpb7opBCzN0rZfm', 7);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (12, 'The Battle of The Saints', 'Some battleships', 'the-battle-of-the-saints', 0, '2020-01-31 06:11:14', 'jqrrEItKvbaawkEt', 7);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (13, 'Battle of Cape St. Vincent', 'pew pew pew', 'battle-of-cape-st-vincent', 0, '2020-01-31 06:36:03', 'tStcL7StPkgfHknK', 7);
+INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `privacy`, `post_date`, `post_image`, `user_id`) VALUES (14, 'Code quality', 'Permanent link to this comic: https://xkcd.com/1695/\r\n', 'code-quality', 0, '2020-01-31 10:58:45', 'goaH34P4CSKASqON', 6);
 
 
 INSERT INTO `cms_comments` (`comment_title`, `comment_text`, `comment_date`, `user_id`, `post`) VALUES
@@ -157,13 +157,12 @@ INSERT INTO `cms_comments` (`comment_title`, `comment_text`, `comment_date`, `us
 (NULL, 'This is from a private collection. Fancy', '2020-01-30 10:14:08', 5, 7),
 (NULL, 'Tremendous shoes!', '2020-01-30 10:28:10', 4, 4),
 (NULL, 'Those flower fields are huuuuuuge!', '2020-01-30 10:28:41', 4, 3),
-(NULL, 'Haha i\'m president lol', '2020-01-30 10:31:09', 4, 8),
-(NULL, 'The most delicious exotic fruit discovered this way is the strawberry banana. Sadly, it\'s only stable in puree form, so it\'s currently limited to yogurt and smoothies, but they\'re building a massive collider in Europe to search for a strawberry banana that can be eaten whole.', '2020-01-31 06:46:19', 6, 12),
-(NULL, 'ðŸ¦žðŸ¦žðŸ¦ž', '2020-01-31 07:01:32', 6, 13),
-(NULL, 'It\'s like you tried to define a formal grammar based on fragments of a raw database dump from the QuickBooks file of a company that\'s about to collapse in an accounting scandal.', '2020-01-31 11:58:53', 6, 20),
-(NULL, 'I don\'t get it', '2020-01-31 12:04:05', 4, 20),
-(NULL, 'I don\'t get it', '2020-01-31 12:04:18', 4, 11),
-(NULL, 'Huuuuge ships! Very legal and very cool!', '2020-01-31 12:05:27', 4, 16);
+(NULL, 'Haha i\'m president lol', '2020-01-30 10:31:09', 4, 6),
+(NULL, 'The most delicious exotic fruit discovered this way is the strawberry banana. Sadly, it\'s only stable in puree form, so it\'s currently limited to yogurt and smoothies, but they\'re building a massive collider in Europe to search for a strawberry banana that can be eaten whole.', '2020-01-31 06:46:19', 6, 9),
+(NULL, 'It\'s like you tried to define a formal grammar based on fragments of a raw database dump from the QuickBooks file of a company that\'s about to collapse in an accounting scandal.', '2020-01-31 11:58:53', 6, 14),
+(NULL, 'I don\'t get it', '2020-01-31 12:04:05', 4, 12),
+(NULL, 'I don\'t get it', '2020-01-31 12:04:18', 4, 8),
+(NULL, 'Huuuuge ships! Very legal and very cool!', '2020-01-31 12:05:27', 4, 11);
 
 INSERT INTO `cms_role_names` (`role_id`, `role_name`) VALUES
 (0, 'Guest'),
