@@ -11,24 +11,23 @@ class ApiController extends Controller {
         foreach ($posts as $post) {
             $data[] = $post->getData();
         }
-        return self::serveJson($data);
+        return self::returnResponse($data);
     }
 
     public function users() {
 
-        if (!empty($_GET["key"])) {
+        if (!empty($_GET["key"]) && !empty($_GET["user"])) {
             // check if api key is valid
-            $users = UserService::getAll();
-            foreach ($users as $user) {
-                $data[] = $user->getData();
-            }
+            if (UserService::checkApiKey($_GET["user"], $_GET["key"])) {
+                $users = UserService::getAll();
+                foreach ($users as $user) {
+                    $data[] = $user->getData();
+                }
+                return self::returnResponse($data, 200);
+            } 
 
-        } else {
-            $data = ["status" => "No key passed."];
-        }
-        
-
-        return self::serveJson($data);
+        } 
+        return self::returnResponse(["unauthorized"], 401);
     }
 
     // /api/post/create
@@ -64,5 +63,11 @@ class ApiController extends Controller {
 
         // JSON_UNESCAPED_SLASHES = valid links with unescaped slashes
         echo json_encode($jsonData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    }
+
+
+    public function cronjobLog() {
+        $logs = CronjobService::getJobLogs();
+        self::returnResponse($logs);
     }
 }

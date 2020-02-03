@@ -29,7 +29,7 @@
 <h1>404 - Page not found</h1>
 
 <section class="links">
-<a href="/">Go back</a>
+<a href="javascript:window.history.back();">Go back</a>
 <a href="/">Go home</a>
 </section>
 

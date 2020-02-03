@@ -9,6 +9,7 @@ class User {
     protected $registrationDate;
     protected $profileImage;
     protected $postCount;
+    protected $apiKey;
     protected $loggedIn = false;
 
 
@@ -26,6 +27,7 @@ class User {
         $this->registrationDate = $registration_date ?? "";
 
         $this->postCount = $post_count ?? "0";
+        $this->apiKey = $api_key ?? "";
 
         if (isset($profile_image)) {
             $this->profileImage = new Image($properties);
@@ -33,6 +35,11 @@ class User {
             $this->profileImage = new Image([]);
 
         }
+    }
+
+
+    public function getApiKey() {
+        return $this->apiKey;
     }
 
     public function setLoggedIn() {

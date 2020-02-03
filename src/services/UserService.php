@@ -42,14 +42,14 @@ class UserService {
     }
 
     public static function getUserById($userId) {
-        $sql = "SELECT *,
+        $sql = "SELECT *, cms_api_keys.*,
         (SELECT COUNT(*) FROM cms_posts
         WHERE cms_users.id = user_id) AS post_count
         FROM cms_users
         LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
         LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
-
-        WHERE id=:id";
+        LEFT JOIN cms_api_keys ON cms_users.id = cms_api_keys.user_id
+        WHERE cms_users.id=:id";
 
         $params = [":id" => $userId];
 
@@ -66,12 +66,13 @@ class UserService {
     // from cms_users, cms_posts
 
     public static function getUserByName($userName) {
-        $sql = "SELECT *, cms_images.*,
+        $sql = "SELECT *, cms_images.*, cms_api_keys.*,
                 (SELECT COUNT(*) FROM cms_posts
                 WHERE cms_users.id = user_id) AS post_count
                 FROM cms_users
                 LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
                 LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
+                LEFT JOIN cms_api_keys ON cms_users.id = cms_api_keys.user_id
                 WHERE name=:name";
 
         $params = [":name" => $userName];
@@ -86,9 +87,10 @@ class UserService {
     public function getCurrentUser() {
         
         if (!empty($_COOKIE["pictur_login"])) {
-            $sql = "SELECT cms_login_tokens.user_id as id, cms_users.*, cms_images.* FROM cms_login_tokens
+            $sql = "SELECT cms_login_tokens.user_id as id, cms_users.*, cms_images.*, cms_api_keys.* FROM cms_login_tokens
                     LEFT JOIN cms_users ON cms_login_tokens.user_id = cms_users.id
                     LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
+                    LEFT JOIN cms_api_keys ON cms_users.id = cms_api_keys.user_id
                     WHERE cms_login_tokens.token = :token";
 
             $params = [":token" => sha1($_COOKIE["pictur_login"])];
@@ -164,9 +166,17 @@ class UserService {
         App::get("db")->query($sql, $params);
     }
 
+    public function setApiKey(string $userid, string $apikey) {
+        $sql = "INSERT INTO cms_api_keys (user_id, api_key) VALUES
+        (:user_id, :api_key) ON DUPLICATE KEY UPDATE api_key=:api_key";
+
+        $params = [":user_id" => $userid, ":api_key" => $apikey];
+        App::get("db")->query($sql, $params);
+    }
+
     public static function editUser(array $userdata) {
 
-        $user = UserService::getUserById($userdata["id"]);
+        $user = self::getUserById($userdata["id"]);
         $currentInfo = [
             "name" => $user->getName(),
             "email" => $user->getEmail(),
@@ -188,7 +198,11 @@ class UserService {
             else {
                 $params[$key] = $value;
                 if ($key == "email") {
-                    MailService::sendEmailChangedMail($currentInfo["email"], $userdata["email"]);
+
+                    // If email has been changed, send mail to old and new address.
+                    if ($currentInfo["email"] != $userdata["email"]) {
+                        MailService::sendEmailChangedMail($currentInfo["email"], $userdata["email"]);
+                    }
                 }
             }
         }
@@ -295,8 +309,30 @@ class UserService {
             $params = [":token" => sha1($_COOKIE["pictur_login"])];
             App::get("db")->query($sql, $params);
 
-            // Expire login cookie
+            // Expire login cookie and unset session
             setcookie("pictur_login", "1", time() - 300);
         }
-    } 
+        session_unset();
+    }
+
+    public function getRoleNames() {
+        $sql = "SELECT * FROM cms_role_names";
+        $roles = App::get("db")->query($sql);
+        return $roles; 
+    }
+
+
+    public function checkApiKey(string $username, string $apiKey) {
+        $sql = "SELECT * FROM cms_api_keys
+        LEFT JOIN cms_users ON cms_users.id = cms_api_keys.user_id
+        WHERE cms_users.name = :uname AND cms_api_keys.api_key = :apikey";
+
+        $params = [":uname" => $username, ":apikey" => $apiKey];
+
+        $res = App::get("db")->query($sql, $params);
+        if (count($res) > 0) {
+            return true;
+        }
+        return false;
+    }
 }

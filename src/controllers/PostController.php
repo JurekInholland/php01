@@ -12,9 +12,13 @@ class PostController extends Controller {
     public function editPost() {
         if (isset($_GET["post"])) {
             $post = PostService::getPostBySlug($_GET["post"]);
+            if (!self::adminPrivileges($post[0]->getAuthor()->getId())) {
+                return self::view("partials/message", ["message" => "You are not privileged to edit this post."]);
+
+            }
 
             $comments = PostService::getComments($post[0]->getId());
-            return self::view("posts/edit_post", ["readonly" => "readonly", "post" => $post[0], "comments" => $comments]);
+            return self::view("posts/edit_post", ["readonly" => "", "post" => $post[0], "comments" => $comments]);
         }
     }
 
@@ -28,39 +32,73 @@ class PostController extends Controller {
     }
 
     public function deletePost() {
+
+
+
         if (!empty($_GET["id"])) {
+
+            if (!self::adminPrivileges($_GET["id"])) {
+                return self::view("partials/message", ["message" => "You are not privileged to delete this post."]);
+
+            }
+
             PostService::deletePostById($_GET["id"]);
         }
         return self::redirect("");
     }
 
     public function submitPost() {
+
+        if (App::get("user")->getRole() == 0) {
+            $_SESSION["loginMsg"] = "You must be logged in to create posts.";
+            return self::redirect("login");
+        }
+
         if (!empty($_POST)) {
-            // die(var_dump(App::get("user")));
-            $image = ImageService::upload($_FILES["image"]);
+            // die(var_dump($_POST));
 
-            
+            $privacy = 0;
+            if (isset($_POST["privacy"])) {
+                $privacy = 1;
+            }
 
-            $postValues = [
-                "post_title" => $_POST["title"],
-                "post_content" => $_POST["content"],
-                "privacy" => 0,
-                "slug" => createSlug($_POST["title"]),
-                "image_id" => $image["id"],
-                "filename" => $image["filename"],
-                "author" => App::get("user")
-            ];
-
-            $post = new Post($postValues);
-            // die(var_dump($post));
-            PostService::createPost($post);
-            self::redirect("");
-            
-            // die(var_dump($_FILES));
+            // New post
             if ($_POST["post_id"] == "") {
-                // PostService::createPost();
+                $image = ImageService::upload($_FILES["image"]);
+                
+                
+
+                $postValues = [
+                    "post_title" => $_POST["title"],
+                    "post_content" => $_POST["content"],
+                    "privacy" => $privacy,
+                    "slug" => createSlug($_POST["title"]),
+                    "image_id" => $image["id"],
+                    "filename" => $image["filename"],
+                    "author" => App::get("user")
+                ];
+    
+                $post = new Post($postValues);
+                PostService::createPost($post);
+
+            // Edit existing post
+            } elseif ($_POST["post_id"] != "") {
+                $postValues = [
+                    "post_id" => $_POST["post_id"],
+                    "post_title" => $_POST["title"],
+                    "post_content" => $_POST["content"],
+                    "privacy" => $privacy,
+                    "slug" => createSlug($_POST["title"])
+                ];
+
+
+                $post = new Post($postValues);
+                PostService::editPost($post);
             }
         }
+        return header("Location: {$post->getViewLink()}");
+
+
     }
 
     public function submitComment() {

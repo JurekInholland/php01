@@ -26,8 +26,28 @@
         align-items: center;
         justify-content: center;
     }
+
+    #apikey {
+        display: flex;
+        flex-basis: 100%;
+    }
+    .form .stretch {
+        flex: 1 1 100%
+    }
+
+    .stretch button {
+        margin-left: .5rem;
+    }
 </style>
 
+<script>
+
+function genkey() {
+    // apiinput.value = "KEYLOL";
+}
+
+
+</script>
 
 <div class="container">
 
@@ -37,7 +57,7 @@
     <section class="image">
     <figure class="profile_picture">
 
-<img src="<?=$user->getProfilePicture()?>" alt="">
+<img src="<?=$user->getProfilePicture()?>" alt="" id="image">
 
 </figure>
     </section>
@@ -89,10 +109,25 @@
 
     </div>
 
+
+    <div class="field stretch">
+    <label class="label">Api Key</label>
+    <section class="control has-icons-left" id="apikey">
+        <input readonly class="input" id="apiinput" name="apikey" type="text" placeholder="Press Generate" value="<?=$user->getApiKey()?>">
+        <span class="icon is-small is-left">
+            <i class="fas fa-hockey-puck"></i>
+        </span>
+        <button class="button is-primary" onclick="genkey()">Generate</button>
+
+    </section>
+
+    </div>
+
+
     <!-- TODO: refactor -->
     <div class="field">
     <section class="control">
-    <input type="submit" value="Cancel" class="button is-secondary" name="" id="">
+    <input type="submit" value="Cancel" class="button is-dark" name="cancel" id="">
 
     </section>
 
@@ -107,3 +142,20 @@
     </form>
 </div>
 
+
+
+<script>
+
+file.onchange = function () {
+    let reader = new FileReader();
+    reader.onload = function (e) {
+        displayImage(e);
+    };
+    reader.readAsDataURL(this.files[0]);
+}
+
+function displayImage(e) {
+    image.src = e.target.result;
+}
+
+</script>

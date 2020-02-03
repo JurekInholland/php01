@@ -1,17 +1,14 @@
-FROM ubuntu:latest
+FROM alpine:3.6
 
-# Add crontab file in the cron directory
-ADD crontab /etc/cron.d/php01-cron
+# copy crontabs for root user
+COPY crontab /etc/crontabs/root
 
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/php01-cron
+RUN apk update
+RUN apk add curl
 
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
+RUN chmod 644 /var/log/cron.log
 
-#Install Cron
-RUN apt-get update
-RUN apt-get -y install cron
-
-# Run the command on container startup
-CMD cron && tail -f /var/log/cron.log
+# start crond with log level 8 in foreground, output to stderr
+CMD ["crond", "-f", "-d", "8"]

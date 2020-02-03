@@ -50,6 +50,7 @@ class PostService {
         LEFT JOIN cms_images ON cms_images.image_id = post_image
         LEFT JOIN cms_users ON cms_users.id = cms_posts.user_id
         LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
+        WHERE cms_posts.privacy = 0
         ORDER BY post_date DESC";
 
 
@@ -97,9 +98,14 @@ class PostService {
         
     }
 
-    public function editPost() {
-        $sql = "UPDATE cms_posts SET post_title = :post_title, post_content = :post_content, post_image = :post_image
-        WHERE post_id = :id";
+    public function editPost(Post $post) {
+        $sql = "UPDATE cms_posts SET
+                post_title = :post_title, post_content = :post_content, privacy = :privacy, slug = :slug
+                WHERE post_id = :id";
+
+        $params = [":post_title" => $post->getTitle(), ":post_content" => $post->getContent(), ":privacy" => $post->getPrivacy(), ":slug" => $post->getSlug(), ":id" => $post->getId()];
+
+        App::get("db")->query($sql, $params);
     }
 
     public function deletePostById($postId) {

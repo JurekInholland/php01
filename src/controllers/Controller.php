@@ -22,4 +22,14 @@ class Controller {
 
         session_unset();
     }
+
+        // Check if the user with the given id is authorized. Either by having the same id
+    // or by having a role of Administrator or Superadministrator.
+    protected static function adminPrivileges($id) {
+        $currentUser = App::get("user");
+        if ($currentUser->getRole() < 2 && $currentUser->getId() != $id) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -39,4 +39,9 @@ class CronjobService {
         $res = App::get("db")->query($sql);
         return $res[0]["cronjob_key"];
     }
+
+    public function getJobLogs() {
+        $sql = "SELECT * FROM cms_jobs";
+        return App::get("db")->query($sql);
+    }
 }

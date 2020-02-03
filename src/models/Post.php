@@ -74,8 +74,13 @@ class Post {
         return $this->privacy;
     }
 
-    public function getLink() {
+    public function getEditLink() {
         $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/edit?post={$this->getSlug()}";
+        return stripslashes($url);
+    }
+
+    public function getViewLink() {
+        $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/view?post={$this->getSlug()}";
         return stripslashes($url);
     }
 
@@ -86,7 +91,7 @@ class Post {
             "content" => $this->getContent(),
             "image_id" => $this->getImage()->getId() ?? "",
             "author" => $this->getAuthor()->getName(),
-            "link" => $this->getLink()
+            "link" => $this->getViewLink()
         ];
     }
 }

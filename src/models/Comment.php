@@ -16,7 +16,7 @@ class Comment {
         $this->id = $comment_id ?? "";
         // $this->title = $comment_title;
         $this->text = $comment_text;
-        $this->date = $comment_date;
+        $this->date = $comment_date ?? date("Y-m-d H:i:s");
 
         $this->postId = $post;
 

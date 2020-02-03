@@ -1,2 +1,2 @@
-0 * * * * root echo "Hello world" >> /var/log/cron.log 2>&1
-# Curl cronjob api endpoint every hour at minute 0.
+* * * * * curl "http://php01-webserver/api/cronjob?cronjobkey=123456789qwertzu" >> /var/log/cron.log 2>&1
+# use the docker container name here to call api endpoint independent of the public url.

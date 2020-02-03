@@ -151,6 +151,24 @@ max-width: 100%;
     animation-timing-function: ease-in;
 
 }
+
+.buttons {
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons button, .buttons input {
+    flex-basis: 49%;
+    flex-grow: 0;
+}
+
+#btn_cancel {
+    margin: 0;
+    margin-bottom: .5rem;
+    margin-top: 1rem;
+}
 </style>
 
 <?php
@@ -191,7 +209,12 @@ if (!empty($post->getImage()->getExtension())) {
             <?php endif; ?>
 
         <textarea required id="description" name="content" placeholder="Add a description..." <?=$readonly?>><?=$post->getContent()?></textarea>
-        <input type="submit" name="" class="button is-primary">
+        
+        <section class="buttons">
+        <button id="btn_cancel" class="button is-dark" onclick="window.history.back();">Back</button>
+        <input type="submit" name="submitBtn" class="button is-primary">
+
+        </section>
         </section>
 
     </section>
@@ -201,16 +224,19 @@ if (!empty($post->getImage()->getExtension())) {
         <ul>
             <li>
                 <label class="checkbox">
-                <input type="checkbox">
+                <?php if ($post->getPrivacy() == 1) {$checked = "checked";} else {$checked = "";} ?>
+                <input type="checkbox" name="privacy" <?=$checked?>>
                     Make private
                 </label>
             </li>
+            <?php if ($post->getId() != "") : ?>
             <li>
-                <a class="not-active" href="<?=$post->getImage()->getLink()?>">Download image</a>
+                <a href="<?=$post->getImage()->getLink()?>">Download image</a>
             </li>
             <li>
                 <a href="/post/delete?id=<?=$post->getId()?>">Delete post</a>
             </li>
+            <?php endif; ?>
         </ul>
     </section>
 </section>

@@ -36,7 +36,10 @@ class UserController extends Controller {
     }
 
     public function createUser() {
-        return self::view("users/create_user");
+
+        $rolenames = UserService::getRoleNames();
+
+        return self::view("users/create_user", ["roles" => $rolenames]);
     }
 
 
@@ -64,8 +67,9 @@ class UserController extends Controller {
         $id = $_POST["id"];
         $currentUser = App::get("user");
 
-        if ($currentUser->getRole() < 2 && $currentUser->getId() != $_POST["id"]) {
+        if (!self::adminPrivileges($id)) {
             return self::view("partials/message", ["message" => "You are not authorized to do this."]);
+
         }
 
         if (isset($_POST["edit"])) {
@@ -82,43 +86,51 @@ class UserController extends Controller {
 
     }
 
-    // Check if the user with the given id is authorized. Either by having the same id
-    // or by having a role of Administrator or Superadministrator.
-    private static function adminPrivileges($id) {
-        $currentUser = App::get("user");
-        if ($currentUser->getRole() < 2 && $currentUser->getId() != $id) {
-            return false;
-        }
-        return true;
-    }
+
 
     public function submitEdit() {
 
-        $user = App::get("user");
+        if (!empty($_POST["cancel"])) {
+            return self::redirect("user?id={$_POST["id"]}");
+        }
 
-        if ($user->getId() != $_POST["id"]) {
-            if ($user->getRole() < 2) {
-                return self::view("partials/message", ["message" => "You are not authorized to edit this profile."]);
+        if (!self::adminPrivileges($_POST["id"])) {
+            return self::view("partials/message", ["message" => "You are not authorized to edit this profile."]);
+        }
+
+        if (!empty($_POST["submitBtn"])) {
+    
+            $imageId = "";
+            if (!empty($_FILES["profile_image"]["name"])) {
+                $image = ImageService::upload($_FILES["profile_image"]);
+                $imageId = $image["id"];
             }
+            $userinfo = [
+                "id" => $_POST["id"],            
+                "name" => $_POST["name"],
+                "email" => $_POST["email"],
+                "password" => $_POST["password"],
+                "profile_image" => $imageId
+            ];
+            // die (var_dump($imageId));
+    
+            UserService::editUser($userinfo);
+            return self::redirect("user?id={$_POST["id"]}");
+
+
+        // Generate API key
+        } else {
+            $key = generateUuid(16);
+            UserService::setApiKey($_POST["id"], $key);
+            return self::redirect("user/edit?id={$_POST["id"]}");
         }
+        
 
-        $imageId = "";
-        if (!empty($_FILES["profile_image"]["name"])) {
-            $image = ImageService::upload($_FILES["profile_image"]);
-            $imageId = $image["id"];
+    }
+
+    public function submitCreate() {
+        if (!empty($_POST)) {
+
         }
-
-        $userinfo = [
-            "id" => $_POST["id"],            
-            "name" => $_POST["name"],
-            "email" => $_POST["email"],
-            "password" => $_POST["password"],
-            "profile_image" => $imageId
-        ];
-        // die (var_dump($imageId));
-
-        UserService::editUser($userinfo);
-        return self::redirect("user?id={$_POST["id"]}");
-
     }
 }

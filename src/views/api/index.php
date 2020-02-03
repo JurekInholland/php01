@@ -23,6 +23,8 @@
         passed via GET request.
     </p>
 
+    <p>For example: <code>http://localhost:7788/api/users?user=YOUR-USERNAME&key=YOUR-API-KEY</code></p>
+
     <table class="table">
         <thead>
             <tr>
@@ -54,7 +56,8 @@
             <tr>
                 <td><a href="/api/cronjob">/api/cronjob</a></td>
                 <td>This endpoint is accessed by a cronjob vial <a href="https://curl.haxx.se/">curl</a>.
-                A special cronjob key is necessary for access. This is not meant to be accessed by users.</td>
+                A special cronjob key is necessary for access. This is not meant to be accessed by users.
+                Job execution is logged <a href="/api/cronjob/logs">here</a>.</td>
                 <td>Yes (cronjob key)</td>
             </tr>
 

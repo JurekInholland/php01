@@ -9,7 +9,7 @@ $router->get("user", "UserController@user");
 
 $router->get("user/edit", "UserController@editProfile");
 $router->get("user/create", "UserController@createUser");
-
+$router->post("user/create/submit", "UserController@submitCreate");
 
 $router->get("resetpassword", "AuthController@resetPassword");
 
@@ -50,6 +50,7 @@ $router->get("api", "ApiController@index");
 $router->get("api/posts", "ApiController@posts");
 $router->get("api/users", "ApiController@users");
 $router->get("api/cronjob", "ApiController@cronjob");
+$router->get("api/cronjob/logs", "ApiController@cronjobLog");
 
 
 

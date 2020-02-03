@@ -37,7 +37,7 @@ body {
     padding: 1.5rem;
     display: flex;
     flex-direction: row;
-    /* align-items: flex-end; */
+    align-items: flex-end;  
     justify-content: space-between;
 }
 
@@ -121,7 +121,7 @@ body {
             <span>
                 <?=$post->getContent()?>
             </span>
-            <a href="#">Edit</a>
+            <a href="<?=$post->getEditLink()?>">Edit</a>
         </section>
 
 

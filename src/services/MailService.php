@@ -24,23 +24,32 @@ class MailService {
         $subject = "Pictur password reset";
         $body = "To choose a new password, please click this link:<br>{$link}<br>The token will be valid for 60 minutes.";
         
+
         self::sendMail($subject, $body, $user->getEmail());
     }
 
     private static function sendMail(string $subject, string $body, string $address) {
-        $mail = new PHPMailer();
-        $mail->isSMTP();
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = '465';
-        $mail->isHTML();
-        $mail->Username = 'phpcmsjurek@gmail.com';
-        $mail->Password = 'PASSWORD';
-        $mail->SetFrom('phpcmsjurek@gmail.com');
-        $mail->Subject = $subject;
-        $mail->Body = $body;
-        $mail->AddAddress($address);
-        $mail->Send();
+        
+        try {
+            $mail = new PHPMailer();
+            $mail->isSMTP();
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = '465';
+            $mail->isHTML();
+            $mail->Username = 'phpcmsjurek@gmail.com';
+            $mail->Password = 'aecxhhwzzfznmpdo';
+            $mail->SetFrom('phpcmsjurek@gmail.com');
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            $mail->AddAddress($address);
+            $mail->Send();
+
+        // Catch PHPMailer Exception
+        } catch (Exception $mailException) {
+            Logger::warn("Exception during sendMail: {$mailException}");
+        }
+        
     }
 }

@@ -1,5 +1,5 @@
 vendor
 mysql
 node_modules
-public/uploads
+# public/uploads
 src/config/api_keys.ini
