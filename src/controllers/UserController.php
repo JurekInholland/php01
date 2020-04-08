@@ -37,8 +37,11 @@ class UserController extends Controller {
 
     public function createUser() {
 
-        $rolenames = UserService::getRoleNames();
+        if (!App::get("user")->getRole() > 0) {
+            return self::view("partials/message", ["message" => "You are not allowed to create new users. Please sign up."]);
+        }
 
+        $rolenames = UserService::getRoleNames();
         return self::view("users/create_user", ["roles" => $rolenames]);
     }
 
@@ -129,8 +132,22 @@ class UserController extends Controller {
     }
 
     public function submitCreate() {
+        // die(var_dump($_POST));
         if (!empty($_POST)) {
+            if (App::get("user")->getRole() >= (int)$_POST["role"]) {
+                $userinfo = [
+                    "username" => $_POST["username"],
+                    "email" => $_POST["email"],
+                    "password" => $_POST["password"],
+                    "role" => $_POST["role"]
+                ];
+                // die(var_dump($userinfo));
+                UserService::createUser($userinfo);
+                return self::redirect("user/edit?name={$_POST["username"]}");
 
+            } else {
+                return self::view("partials/message", ["message" => "You cannot create users with greater privileges than you currently have."]);
+            }
         }
     }
 }

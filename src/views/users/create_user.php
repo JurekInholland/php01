@@ -83,19 +83,7 @@ form select option {
             </span>
         </section>
 
-          <!-- <div class="field">
-    <div class="control">
-      <div class="select is-info">
-        <select name="role">
-          <option value="0">Select dropdown</option>
-          <option value="1">With options</option>
-        </select>
-      </div>
-    </div>
-  </div> -->
-
   <section class="control">
-
     <input type="submit" value="Create" class="button is-primary">
   </section>
   </form>

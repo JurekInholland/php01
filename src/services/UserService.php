@@ -142,16 +142,14 @@ class UserService {
 
     }
 
-    private static function createUser(array $userdata) {
+    public static function createUser(array $userdata) {
         // TODO: Validate input
-
         extract($userdata);
-
         $sql = "INSERT INTO cms_users (`name`, `email`, `password`, `role`) VALUES (:username, :email, :password, :role)";
         $params = [":username" => $username,
                    ":email" => $email,
                    ":password" => $password,
-                   ":role" => 1];
+                   ":role" => $role];
         
         App::get("db")->query($sql, $params);
         return;
