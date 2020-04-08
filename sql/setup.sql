@@ -154,13 +154,13 @@ INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `priva
 
 INSERT INTO `cms_comments` (`comment_title`, `comment_text`, `comment_date`, `user_id`, `post`) VALUES
 (NULL, 'I drew this!', '2020-01-30 10:10:43', 5, 3),
-(NULL, 'This is from a private collection. Fancy', '2020-01-30 10:14:08', 5, 7),
+(NULL, 'This is from a private collection. Fancy', '2020-01-30 10:14:08', 5, 5),
 (NULL, 'Tremendous shoes!', '2020-01-30 10:28:10', 4, 4),
-(NULL, 'Those flower fields are huuuuuuge!', '2020-01-30 10:28:41', 4, 3),
+(NULL, 'Those flower fields are huuuuuuge!', '2020-01-30 10:28:41', 4, 1),
 (NULL, 'Haha i\'m president lol', '2020-01-30 10:31:09', 4, 6),
 (NULL, 'The most delicious exotic fruit discovered this way is the strawberry banana. Sadly, it\'s only stable in puree form, so it\'s currently limited to yogurt and smoothies, but they\'re building a massive collider in Europe to search for a strawberry banana that can be eaten whole.', '2020-01-31 06:46:19', 6, 9),
 (NULL, 'It\'s like you tried to define a formal grammar based on fragments of a raw database dump from the QuickBooks file of a company that\'s about to collapse in an accounting scandal.', '2020-01-31 11:58:53', 6, 14),
-(NULL, 'I don\'t get it', '2020-01-31 12:04:05', 4, 12),
+(NULL, 'I don\'t get it', '2020-01-31 12:04:05', 4, 7),
 (NULL, 'I don\'t get it', '2020-01-31 12:04:18', 4, 8),
 (NULL, 'Huuuuge ships! Very legal and very cool!', '2020-01-31 12:05:27', 4, 11);
 
