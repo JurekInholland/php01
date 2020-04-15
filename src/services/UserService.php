@@ -148,7 +148,7 @@ class UserService {
         $params = [":username" => $username,
                    ":email" => $email,
                    ":password" => $password,
-                   ":role" => $role];
+                   ":role" => 0];
         
         App::get("db")->query($sql, $params);
         return;

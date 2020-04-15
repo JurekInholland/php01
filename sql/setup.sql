@@ -1,5 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
-DROP TABLE IF EXISTS cms_users, cms_comments, cms_images, cms_login_tokens, cms_posts, cms_role_names, cms_api_keys, cms_password_tokens, cms_jobs, cms_settings;
+DROP TABLE IF EXISTS payments, cms_users, cms_comments, cms_images, cms_login_tokens, cms_posts, cms_role_names, cms_api_keys, cms_password_tokens, cms_jobs, cms_settings;
 SET FOREIGN_KEY_CHECKS=1;
 
 ALTER DATABASE projectdb CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
