@@ -23,7 +23,7 @@
         passed via GET request.
     </p>
 
-    <p>For example: <code>http://localhost:7788/api/users?user=YOUR-USERNAME&key=YOUR-API-KEY</code></p>
+    <p>For example: <code>https://jbaumann.nl/api/users?user=YOUR-USERNAME&key=YOUR-API-KEY</code></p>
 
     <table class="table">
         <thead>

@@ -82,17 +82,23 @@ class Post {
     }
 
     public function getEditLink() {
-        $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/edit?post={$this->getSlug()}";
+        // $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/edit?post={$this->getSlug()}";
+        $url = "https://jbaumann.nl/edit?post={$this->getSlug()}";
+        
         return stripslashes($url);
     }
 
     public function getViewLink() {
-        $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/view?post={$this->getSlug()}";
+        // $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/view?post={$this->getSlug()}";
+        $url = "https://jbaumann.nl/view?post={$this->getSlug()}";
+
         return stripslashes($url);
     }
 
     public function getPdfLink() {
-        $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/pdf?post={$this->getSlug()}";
+        // $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/pdf?post={$this->getSlug()}";
+        $url = "https://jbaumann.nl/pdf?post={$this->getSlug()}";
+
         return stripslashes($url);
     }
 
