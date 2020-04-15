@@ -76,8 +76,7 @@ class AuthController extends Controller {
 
             if (empty($_SESSION["registerMsg"])) {
                 // Success
-                return self::redirect("");
-                // return self::view("partials/goback");
+                return self::redirect("login");
             }
             return self::redirect("register");
 

@@ -83,6 +83,23 @@ class UserService {
         }
     }
 
+    public static function getUserByEmail($email) {
+        $sql = "SELECT *, cms_images.*, cms_api_keys.*,
+                (SELECT COUNT(*) FROM cms_posts
+                WHERE cms_users.id = user_id) AS post_count
+                FROM cms_users
+                LEFT JOIN cms_role_names ON cms_users.role = cms_role_names.role_id
+                LEFT JOIN cms_images ON cms_users.profile_image = cms_images.image_id
+                LEFT JOIN cms_api_keys ON cms_users.id = cms_api_keys.user_id
+                WHERE email=:email";
+
+        $params = [":email" => $email];
+
+        $user = App::get("db")->query($sql, $params);
+        if (!empty($user[0])) {
+            return new User($user[0]); 
+        }
+    }
 
     public function getCurrentUser() {
         
@@ -134,7 +151,8 @@ class UserService {
         if (strlen($credentials["password"]) >= 5 && strlen($credentials["password"]) <= 32) {
             $credentials["password"] = password_hash($credentials["password"], PASSWORD_BCRYPT);
 
-            return self::createUser($credentials);
+            self::createUser($credentials);
+            return;
 
         }
         return "Password must be between 5 and 32 characters.";
@@ -144,6 +162,14 @@ class UserService {
     public static function createUser(array $userdata) {
         // TODO: Validate input
         extract($userdata);
+
+        $existingName = self::getUserByName($username);
+        $existingMail = self::getUserByEmail($email);
+        // die(var_dump($existingName, $existingMail));
+        if ($existingName != null || $existingMail != null) {
+            return false;
+        }
+
         $sql = "INSERT INTO cms_users (`name`, `email`, `password`, `role`) VALUES (:username, :email, :password, :role)";
         $params = [":username" => $username,
                    ":email" => $email,
@@ -151,7 +177,7 @@ class UserService {
                    ":role" => 0];
         
         App::get("db")->query($sql, $params);
-        return;
+        return true;
 
     }
 

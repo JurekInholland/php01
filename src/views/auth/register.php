@@ -77,6 +77,7 @@ h1 {
   <img class="site_logo" src="/img/logo.svg" alt="">
   <form action="/register/submit" class="auth_form" method="POST">
       <h1>Sign up</h1>
+      <p><?=$_SESSION["registerMsg"]?></p>
       <p id="feedback_name"></p>
       <section class="control has-icons-left">
           <input class="input" id="name" name="username" type="text" placeholder="Username" value="">

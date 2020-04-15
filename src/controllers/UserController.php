@@ -132,19 +132,19 @@ class UserController extends Controller {
 
     public function submitCreate() {
         if (!empty($_POST)) {
-            if (App::get("user")->getRole() >= (int)$_POST["role"]) {
-                $userinfo = [
-                    "username" => $_POST["username"],
-                    "email" => $_POST["email"],
-                    "password" => $_POST["password"],
-                    "role" => $_POST["role"]
-                ];
-                UserService::createUser($userinfo);
+            $userinfo = [
+                "username" => $_POST["username"],
+                "email" => $_POST["email"],
+                "password" => $_POST["password"],
+                "role" => $_POST["role"]
+            ];
+            if (UserService::createUser($userinfo)) {
                 return self::redirect("user/edit?name={$_POST["username"]}");
-
             } else {
-                return self::view("partials/message", ["message" => "You cannot create users with greater privileges than you currently have."]);
+                return self::view("partials/message", ["message" => "User already exists."]);
             }
+
+           
         }
     }
 }
