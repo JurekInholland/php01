@@ -103,9 +103,14 @@ CREATE TABLE `cms_settings` (
 	`job_interval` SMALLINT(6) NULL DEFAULT NULL
 )ENGINE=InnoDB;
 
--- INSERT INTO cms_users (id, name, email, password, role) VALUES
--- (1, 'admin', 'admin@mail.com', 'asd', 1),
--- (2, 'user', 'user@mail.com', 'password', 0);
+CREATE TABLE `payments` (
+  `payment_id` varchar(100) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
+  `last_edited` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `invoice_id` char(8) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`payment_id`)
+) ENGINE=InnoDB;
 
 INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('admin', 'admin@mail.com', '$2y$10$.IjBJAY6iKuuouGuZxfb2es70exK/eDnffsg12UU4fqA/wXUeCeiy', 1, '2020-01-22 19:48:03', NULL);
 INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('user', 'user@mail.com', '$2y$10$evO095wRndo4yc7ezFvYSuYHfbHGMMnaifAwIrnUGd0Ai1OH7OT/q', 1, '2020-01-22 19:48:03', 'tG9UkEvAjM9pK1K3');
@@ -155,7 +160,7 @@ INSERT INTO `cms_posts` (`post_id`, `post_title`, `post_content`, `slug`, `priva
 INSERT INTO `cms_comments` (`comment_title`, `comment_text`, `comment_date`, `user_id`, `post`) VALUES
 (NULL, 'I drew this!', '2020-01-30 10:10:43', 5, 3),
 (NULL, 'This is from a private collection. Fancy', '2020-01-30 10:14:08', 5, 5),
-(NULL, 'Tremendous shoes!', '2020-01-30 10:28:10', 4, 4),
+(NULL, 'Tremendous shoes!', '2020-01-30 10:28:10', 4, 2),
 (NULL, 'Those flower fields are huuuuuuge!', '2020-01-30 10:28:41', 4, 1),
 (NULL, 'Haha i\'m president lol', '2020-01-30 10:31:09', 4, 6),
 (NULL, 'The most delicious exotic fruit discovered this way is the strawberry banana. Sadly, it\'s only stable in puree form, so it\'s currently limited to yogurt and smoothies, but they\'re building a massive collider in Europe to search for a strawberry banana that can be eaten whole.', '2020-01-31 06:46:19', 6, 9),
@@ -169,3 +174,5 @@ INSERT INTO `cms_role_names` (`role_id`, `role_name`) VALUES
 (1, 'User'),
 (2, 'Administrator'),
 (3, 'Superadministrator');
+
+INSERT INTO `cms_settings` (`cronjob_key`, `job_interval`) VALUES ('123456789abcdefg', 15);

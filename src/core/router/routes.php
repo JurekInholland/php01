@@ -68,3 +68,7 @@ $router->get("admin/export/csv", "AdminController@exportToCsv");
 $router->get("admin/export/xls", "AdminController@exportToXls");
 
 $router->get("premium", "PremiumController@index");
+$router->get("premium/pro", "PremiumController@pro");
+$router->get("premium/plus", "PremiumController@plus");
+
+$router->get("payment/complete", "PaymentController@complete");

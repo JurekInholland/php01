@@ -51,7 +51,7 @@
             </ul>
         </div>
 
-        <a href="/plus">
+        <a href="/premium/plus">
             <h3>PLUS</h3>
             <h1>€9/month</h1>
 
@@ -64,7 +64,7 @@
             </ul>
         </a>
 
-        <a href="/pro">
+        <a href="/premium/pro">
             <h3>PRO</h3>
             <h1>€29/month</h1>
 

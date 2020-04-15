@@ -7,10 +7,9 @@ class PaymentService {
 
 
     public static function getClient() {
-        $config = parse_ini_file("../src/config/api_keys.ini", true);
-
+        
         $mollie = new \Mollie\Api\MollieApiClient();
-        $mollie->setApiKey($config["mollie"]);
+        $mollie->setApiKey(App::get("api")["mollie"]);
         return $mollie;
     }
 
@@ -60,7 +59,7 @@ class PaymentService {
                 "value" => $value 
             ],
             "description" => "Order #{$orderId}",
-            "redirectUrl" => "https://jbaumann.nl/payment/complete/{$orderId}",
+            "redirectUrl" => "https://jbaumann.nl/payment/complete?order={$orderId}",
             "webhookUrl" => "https://jbaumann.nl/payment/webhook",
             "metadata" => [
                 "order_id" => $orderId,

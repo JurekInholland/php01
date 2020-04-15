@@ -85,7 +85,7 @@ h1 {
       </section>
 
       <section class="control has-icons-left" id="password" >
-          <input class="input" type="text" placeholder="Password" name="password" value="">
+          <input class="input" type="password" placeholder="Password" name="password" value="">
           <span class="icon is-small is-left">
             <i class="fas fa-key"></i>
           </span>

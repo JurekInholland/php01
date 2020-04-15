@@ -1,5 +1,5 @@
 <section class="container">
-<h1>ADMIN</h1>
+<h1>Admin Dashboard</h1>
 
 <ul>
     <li><a href="admin/import">Import users</a></li>
