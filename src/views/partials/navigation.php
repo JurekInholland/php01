@@ -5,7 +5,6 @@
   justify-content: flex-start;
   align-items: center;
   flex-wrap: nowrap;
-  /* margin-right: 3rem; */
   font-weight: normal;
 }
 
@@ -92,11 +91,6 @@ a.dropdown-item:hover {
 }
 </style>
 
-<?php
-
-// die(var_dump(App::get("user")));
-
-?>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <section class="container">
@@ -141,8 +135,16 @@ a.dropdown-item:hover {
         API
       </a>
 
+      <a href="/admin" class="navbar-item">
+        Admin
+      </a>
+
       <a href="/about" class="navbar-item">
         About
+      </a>
+
+      <a href="/premium" class="navbar-item">
+        Premium
       </a>
 
     </div>

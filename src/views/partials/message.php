@@ -1,5 +1,5 @@
 <style>
-.message {
+.message_box {
     background-color: rgba(255, 255, 255, .25);
     padding: 1.5rem;
     font-size: 2.5rem;
@@ -18,7 +18,7 @@
 </style>
 
 <section class="container">
-    <section class="message">
+    <section class="message_box">
         <span><?=$message?></span>
         <section class="links">
         <a href="javascript:window.history.back();">Go back</a>

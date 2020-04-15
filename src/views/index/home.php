@@ -1,13 +1,31 @@
-<h1><?=$message?></h1>
 
-<a href="/users">View Users</a>
+<section class="home_container">
 
-<article class="message">
-  <div class="message-header">
-    <p>Hello World</p>
-    <button class="delete" aria-label="delete"></button>
+
+  <div class="posts">
+    <?php require "../src/views/posts/overview.php"; ?>
   </div>
-  <div class="message-body">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+
+  <div class="twitter">
+  <a class="twitter-timeline" data-lang="en" data-dnt="true" data-theme="dark" href="https://twitter.com/pictur09272636">Tweets by pictur</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
-</article>
+</section>
+
+<style>
+  .home_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+.posts {
+  flex: 10 1 800px;
+}
+  .twitter {
+    margin: 0 auto;
+    flex: 1 1 360px;
+    background-color: #292F33;
+  }
+
+
+</style>

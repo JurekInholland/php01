@@ -6,7 +6,6 @@ class MailService {
 
     public static function sendEmailChangedMail(string $oldmail, string $newmail) {
         $subject = "Your email on Pictur has been changed.";
-
         $body = "Your email on Pictur has just been changed from {$oldmail} to {$newmail}.";
 
         self::sendMail($subject, $body, $oldmail);
@@ -14,8 +13,6 @@ class MailService {
     }
 
     public static function sendForgotPasswordMail(User $user, string $token) {
-
-
         $scheme = $_SERVER['REQUEST_SCHEME'] . '://';
         $host = getenv('HTTP_HOST');
 
@@ -39,7 +36,7 @@ class MailService {
             $mail->Port = '465';
             $mail->isHTML();
             $mail->Username = 'phpcmsjurek@gmail.com';
-            $mail->Password = 'aecxhhwzzfznmpdo';
+            $mail->Password = App::get("api")["gmail"];
             $mail->SetFrom('phpcmsjurek@gmail.com');
             $mail->Subject = $subject;
             $mail->Body = $body;

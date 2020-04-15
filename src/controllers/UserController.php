@@ -26,7 +26,6 @@ class UserController extends Controller {
 
         if (!empty($user)) {
             $posts = PostService::getPostsByUserId($user->getId());
-            // die(var_dump($posts));
         } else {
             return self::view("partials/message", ["message" => "No user found."]);
 
@@ -132,7 +131,6 @@ class UserController extends Controller {
     }
 
     public function submitCreate() {
-        // die(var_dump($_POST));
         if (!empty($_POST)) {
             if (App::get("user")->getRole() >= (int)$_POST["role"]) {
                 $userinfo = [
@@ -141,7 +139,6 @@ class UserController extends Controller {
                     "password" => $_POST["password"],
                     "role" => $_POST["role"]
                 ];
-                // die(var_dump($userinfo));
                 UserService::createUser($userinfo);
                 return self::redirect("user/edit?name={$_POST["username"]}");
 

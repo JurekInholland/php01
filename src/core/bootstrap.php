@@ -39,6 +39,9 @@ date_default_timezone_set('Europe/Amsterdam');
 // Load sql credentials from config.ini
 $config = parse_ini_file("../src/config/config.ini", true);
 
+// Store api credentials for further reference
+App::bind("api", parse_ini_file("../src/config/api_keys.ini", true));
+
 // From now on, db can be accessed via App::get("db)
 App::bind("db", new QueryBuilder(
     Connection::make($config)

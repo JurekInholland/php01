@@ -87,7 +87,6 @@ class User {
     }
 
     public function getProfilePicture() {
-        // die(var_dump($this->profileImage));
 
         if (!empty($this->profileImage->getLink())) {
             return "/{$this->profileImage->getLink()}";

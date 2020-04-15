@@ -24,7 +24,6 @@ class AuthController extends Controller {
     }
 
     public function submitLogin() {
-        // die(var_dump($_POST));
 
         // submit button was pressed
         if (!empty($_POST["submitBtn"])) {

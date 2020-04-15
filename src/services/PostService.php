@@ -61,9 +61,6 @@ class PostService {
             $posts[] = new Post($postinfo);
             
         }
-       
-        // die(var_dump($posts));
-
         return $posts;
 
     }
@@ -81,8 +78,6 @@ class PostService {
 
 
     public function createPost(Post $post) {
-
-        // die(var_dump($post));
 
         $sql = "INSERT INTO cms_posts (post_title, post_content, slug, privacy, post_image, user_id)
                 VALUES (:post_title, :post_content, :slug, :privacy, :post_image, :user_id)";
@@ -150,8 +145,6 @@ class PostService {
         foreach ($commentdata as $comment) {
             $comments[] = new Comment($comment);
         }
-        // die(var_dump($comments[0]));
-
         return $comments ?? [];
     }
 }

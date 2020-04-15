@@ -28,10 +28,6 @@ class ImageService {
 
     public static function upload(array $image) {
 
-        // $image = $_FILES['image'];
-        
-        // die(var_dump($image));
-
         try {
             self::validateUpload($image);
 

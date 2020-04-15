@@ -55,7 +55,6 @@ class PostController extends Controller {
         }
 
         if (!empty($_POST)) {
-            // die(var_dump($_POST));
 
             $privacy = 0;
             if (isset($_POST["privacy"])) {
@@ -121,5 +120,17 @@ class PostController extends Controller {
         }
         return self::view("partials/message", ["message" => "Comments cannot be empty."]);
 
+    }
+
+    public function viewAsPdf() {
+        if (isset($_GET["post"])) {
+            $post = PostService::getPostBySlug($_GET["post"]);
+
+            $data = $post[0];
+            $pdf = PdfService::generatePdf($data);
+            ob_end_clean();
+            return $pdf->Output("post_{$post[0]->getId()}.pdf", 'I');
+
+        }
     }
 }

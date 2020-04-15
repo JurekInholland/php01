@@ -3,6 +3,7 @@ FROM alpine:3.6
 # copy crontabs for root user
 COPY crontab /etc/crontabs/root
 
+# Install curl
 RUN apk update
 RUN apk add curl
 

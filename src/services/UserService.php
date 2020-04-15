@@ -95,7 +95,6 @@ class UserService {
 
             $params = [":token" => sha1($_COOKIE["pictur_login"])];
             $userdata = App::get("db")->query($sql, $params);
-            // die(var_dump($userdata));
             if (!empty($userdata[0])) {
                 $user = new User($userdata[0]);
                 $user->setLoggedIn();

@@ -41,8 +41,9 @@ body {
     justify-content: space-between;
 }
 
-.post_content span {
-    /* width: 100%; */
+.post_content li {
+    float: left;
+    margin-left: 1rem;
 }
 
 .post_content a {
@@ -121,7 +122,11 @@ body {
             <span>
                 <?=$post->getContent()?>
             </span>
-            <a href="<?=$post->getEditLink()?>">Edit</a>
+            <ul>
+                <li><a href="<?=$post->getEditLink()?>">Edit</a></li>
+                <li><a href="<?=$post->getPdfLink()?>">Download PDF</a></li>
+            </ul>
+            
         </section>
 
 

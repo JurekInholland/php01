@@ -3,3 +3,4 @@ mysql
 node_modules
 # public/uploads
 src/config/api_keys.ini
+logs/log.txt

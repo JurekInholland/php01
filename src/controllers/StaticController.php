@@ -7,8 +7,7 @@ class StaticController extends Controller {
         // return self::view("index/home", ["message" => $hello]);
 
         $posts = PostService::getAll();
-        // die(var_dump($posts));
-        return self::view("posts/overview", ["posts" => $posts]);
+        return self::view("index/home", ["posts" => $posts]);
     }
 
 

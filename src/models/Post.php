@@ -91,6 +91,11 @@ class Post {
         return stripslashes($url);
     }
 
+    public function getPdfLink() {
+        $url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/pdf?post={$this->getSlug()}";
+        return stripslashes($url);
+    }
+
     public function getData() {
         return [
             "id" => $this->getId(),
@@ -101,5 +106,10 @@ class Post {
             "author" => $this->getAuthor()->getName(),
             "link" => $this->getViewLink()
         ];
+    }
+
+    public function getQrCode(string $size="500x500") {
+        $url = $this->getViewLink();
+        return ('https://chart.googleapis.com/chart?cht=qr&chld=H|1&chs='.$size.'&chl='.urlencode($url));
     }
 }

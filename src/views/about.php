@@ -23,7 +23,7 @@
 
         <p>
             This is a simple clone of a <a href="https://imgur.com">well known image hosting service</a>,
-            created for the php01 assignment.
+            created for the <span style="text-decoration: line-through">php01</span> php02 assignment.
         </p>
 
         <p>Made by Jurek Baumann © 2020.</p>

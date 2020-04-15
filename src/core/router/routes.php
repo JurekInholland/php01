@@ -31,6 +31,9 @@ $router->get("register", "AuthController@register");
 $router->get("edit", "PostController@editPost");
 $router->get("view", "PostController@viewPost");
 
+$router->get("pdf", "PostController@viewAsPdf");
+
+
 
 
 $router->post("login/submit", "AuthController@submitLogin");
@@ -56,3 +59,12 @@ $router->get("api/cronjob/logs", "ApiController@cronjobLog");
 
 $router->get("about", "StaticController@about");
 
+$router->get("admin", "AdminController@index");
+$router->get("admin/import", "AdminController@import");
+$router->post("admin/import/submit", "AdminController@submitImport");
+$router->get("admin/export", "AdminController@export");
+
+$router->get("admin/export/csv", "AdminController@exportToCsv");
+$router->get("admin/export/xls", "AdminController@exportToXls");
+
+$router->get("premium", "PremiumController@index");
