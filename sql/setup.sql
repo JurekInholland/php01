@@ -114,7 +114,7 @@ CREATE TABLE `payments` (
 
 INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('admin', 'admin@mail.com', '$2y$10$.IjBJAY6iKuuouGuZxfb2es70exK/eDnffsg12UU4fqA/wXUeCeiy', 1, '2020-01-22 19:48:03', NULL);
 INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('user', 'user@mail.com', '$2y$10$evO095wRndo4yc7ezFvYSuYHfbHGMMnaifAwIrnUGd0Ai1OH7OT/q', 1, '2020-01-22 19:48:03', 'tG9UkEvAjM9pK1K3');
-INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('superadmin', 'superadmin@mail.com', '$2y$10$onYX8gB7VCtfSuyY7U0yLurz6eb3WnPI2ORHQfxtd/oalgzrSj.R6', 2, '2020-01-22 19:48:03', NULL);
+INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('superadmin', 'superadmin@mail.com', '$2y$10$onYX8gB7VCtfSuyY7U0yLurz6eb3WnPI2ORHQfxtd/oalgzrSj.R6', 3, '2020-01-22 19:48:03', NULL);
 INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('Donald Trump', 'potus@gov.com', '$2y$10$BdQDuhl0gSMeejAKJe2h9OaXfRK/mUB5cwT2KL8VAONYI38oWPQnW', 1, '2020-01-30 10:06:38', 'B2AUHSunJG4Bg21H');
 INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('Vincent', 'vincent@vangogh@yahoo.com', '$2y$10$AIKr.2iLH7c66DNSh5limulgrjDuxI3ElGKS.RD7rrWM8tOLWoyyC', 3, '2020-01-30 10:08:53', 'nyPrc11I7mpHUxPw');
 INSERT INTO `cms_users` (`name`, `email`, `password`, `role`, `registration_date`, `profile_image`) VALUES ('Randall', 'randalmunroe@email.com', '$2y$10$NYDXgWs4tPA1AaZswM.zM.Uz1.QSHeYnmP25C7BemDxXX3ioma5m6', 1, '2020-01-30 10:32:32', 'bfHXB3ig7zecynND');
